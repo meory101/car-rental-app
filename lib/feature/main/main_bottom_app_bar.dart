@@ -37,14 +37,15 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
         backgroundColor: AppColorManager.white,
         bottomNavigationBar: BottomAppBar(
           color: AppColorManager.white,
-          height: 100,
+          // height: 100,
           elevation: 0,
           child: Container(
-            // margin: EdgeInsets.symmetric(vertical: 5,horizontal: 16),
-            padding: EdgeInsets.symmetric(vertical: 5,horizontal: 16),
+             margin: EdgeInsets.symmetric(vertical: 5,horizontal: 16),
+            // padding: EdgeInsets.symmetric(vertical: 5,horizontal: 16),
             decoration: BoxDecoration(
-                color: AppColorManager.black,
-                borderRadius: BorderRadius.circular(25)),
+                color: AppColorManager.white,
+                // borderRadius: BorderRadius.circular(25)
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -63,13 +64,13 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
                       SvgPicture.asset(AppIconManager.home,
                           colorFilter: ColorFilter.mode(
                               selectedIndex == 0
-                                  ? AppColorManager.white
+                                  ? AppColorManager.mainColor
                                   : AppColorManager.grey,
                               BlendMode.srcIn)),
                       AppTextWidget(
                         text: "home",
                         color: selectedIndex == 0
-                            ? AppColorManager.white
+                            ? AppColorManager.mainColor
                             : AppColorManager.grey,
                       ),
                     ],
@@ -90,13 +91,13 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
                       SvgPicture.asset(AppIconManager.home,
                           colorFilter: ColorFilter.mode(
                               selectedIndex == 1
-                                  ? AppColorManager.white
+                                  ? AppColorManager.mainColor
                                   : AppColorManager.grey,
                               BlendMode.srcIn)),
                       AppTextWidget(
                         text: "bidding",
                         color: selectedIndex == 1
-                            ? AppColorManager.white
+                            ? AppColorManager.mainColor
                             : AppColorManager.grey,
                       ),
                     ],
@@ -117,13 +118,13 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
                       SvgPicture.asset(AppIconManager.person,
                           colorFilter: ColorFilter.mode(
                               selectedIndex == 2
-                                  ? AppColorManager.white
+                                  ? AppColorManager.mainColor
                                   : AppColorManager.grey,
                               BlendMode.srcIn)),
                       AppTextWidget(
                         text: "profile",
                         color: selectedIndex == 2
-                            ? AppColorManager.white
+                            ? AppColorManager.mainColor
                             : AppColorManager.grey,
                       ),
                     ],
@@ -144,13 +145,13 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
                       SvgPicture.asset(AppIconManager.more,
                           colorFilter: ColorFilter.mode(
                               selectedIndex == 3
-                                  ? AppColorManager.white
+                                  ? AppColorManager.mainColor
                                   : AppColorManager.grey,
                               BlendMode.srcIn)),
                       AppTextWidget(
                         text: "more",
                         color: selectedIndex == 3
-                            ? AppColorManager.white
+                            ? AppColorManager.mainColor
                             : AppColorManager.grey,
                       ),
                     ],
