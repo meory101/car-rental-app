@@ -62,18 +62,35 @@ class _ProductMoreDetailsExpansionCardState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppTextWidget(
-                        text: "Car Details",
+                        text: "Car Model",
                         fontSize: FontSizeManager.fs16,
                         fontWeight: FontWeight.w600,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
                       AppTextWidget(
-                        text: "Car Car",
+                        text: "BMW",
                         fontSize: FontSizeManager.fs15,
                         fontWeight: FontWeight.w400,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
+                      ),
+                      SizedBox(
+                        height: AppHeightManager.h4point4,
+                      ),
+                      AppTextWidget(
+                        text: "Car Brand",
+                        fontSize: FontSizeManager.fs16,
+                        fontWeight: FontWeight.w600,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      AppTextWidget(
+                        text:"Brand",
+                        fontSize: FontSizeManager.fs15,
+                        fontWeight: FontWeight.w400,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 10,
                       ),
                       SizedBox(
                         height: AppHeightManager.h4point4,
@@ -93,24 +110,8 @@ class _ProductMoreDetailsExpansionCardState
                         overflow: TextOverflow.ellipsis,
                         maxLines: 10,
                       ),
-                      SizedBox(
-                        height: AppHeightManager.h4point4,
-                      ),
-                      AppTextWidget(
-                        text: "Brand details",
-                        fontSize: FontSizeManager.fs16,
-                        fontWeight: FontWeight.w600,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      AppTextWidget(
-                        text:
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
-                        fontSize: FontSizeManager.fs15,
-                        fontWeight: FontWeight.w400,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 10,
-                      ),
+
+
                     ],
                   ),
                 ),
