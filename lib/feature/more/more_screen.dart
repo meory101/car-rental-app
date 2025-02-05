@@ -8,6 +8,7 @@ import '../../core/resource/color_manager.dart';
 import '../../core/resource/font_manager.dart';
 import '../../core/resource/size_manager.dart';
 import '../../core/widget/text/app_text_widget.dart';
+import '../main/main_bottom_app_bar.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({super.key});
@@ -24,6 +25,7 @@ class _MoreScreenState extends State<MoreScreen> {
       floatingActionButton: MainAppButton(
         onTap: () {
           AppSharedPreferences.clear();
+          selectedIndex = 0;
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) {
