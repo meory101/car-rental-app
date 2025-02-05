@@ -77,7 +77,7 @@ class TitleAppFormFiled extends StatelessWidget {
             maxLines: maxLines,
             validator: validator,
             onChanged: onChanged,
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.done,
             hintText: hint,
             textInputType: textInputType,
           ),

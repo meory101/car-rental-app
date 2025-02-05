@@ -41,16 +41,15 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
           color: AppColorManager.background,
 
           height: AppHeightManager.h12,
+
           elevation: 0,
           child: Container(
-
             decoration: BoxDecoration(
-
               color: AppColorManager.black,
               borderRadius: BorderRadius.circular(AppRadiusManager.r30),
             ),
             padding: EdgeInsets.only(
-              top: AppWidthManager.w3,
+              top: AppWidthManager.w3Point8,
               bottom: AppWidthManager.w1,
               left: AppWidthManager.w3,
               right: AppWidthManager.w3,

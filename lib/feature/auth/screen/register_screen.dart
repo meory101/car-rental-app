@@ -2,6 +2,7 @@ import 'package:car_rental_app/core/resource/icon_manager.dart';
 import 'package:car_rental_app/core/resource/validation_helper.dart';
 import 'package:car_rental_app/core/widget/container/decorated_container.dart';
 import 'package:car_rental_app/core/widget/image/main_image_widget.dart';
+import 'package:car_rental_app/feature/auth/screen/additional_info_screen.dart';
 import 'package:car_rental_app/feature/auth/screen/login_screen.dart';
 import 'package:car_rental_app/feature/main/main_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +36,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void onSignUpClicked() async {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
+    Navigator.of(context).push(MaterialPageRoute(
       builder: (context) {
-        return MainBottomAppBar();
+        return AdditionalInfoScreen();
       },
     ));
   }

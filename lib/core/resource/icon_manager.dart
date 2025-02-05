@@ -13,6 +13,7 @@ abstract class AppImageManager {
   static const String car1 = '$_iconBasePath/1.jpg';
   static const String car2 = '$_iconBasePath/2.jpg';
   static const String carKey = '$_iconBasePath/car-key.png';
+  static const String wheel = '$_iconBasePath/wheel.png';
 
 
 }
