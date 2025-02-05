@@ -22,69 +22,71 @@ class _HomeBannersState extends State<HomeBanners> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CarouselSlider(
-          options: CarouselOptions(
-            onPageChanged: (index, reason) {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-            aspectRatio: AppWidthManager.w92 / AppHeightManager.h40,
-            enableInfiniteScroll: true,
-            autoPlay: false,
-            viewportFraction: 1,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          CarouselSlider(
+            options: CarouselOptions(
+              onPageChanged: (index, reason) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              aspectRatio: AppWidthManager.w92 / AppHeightManager.h25,
+              enableInfiniteScroll: true,
+              autoPlay: true,
+              viewportFraction: 1,
+            ),
+            items: List.generate(
+              2,
+              (index) {
+                return InkWell(
+                  onTap: () {},
+                  child: Container(
+                      width: AppWidthManager.w92,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(AppRadiusManager.r10)),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: MainImageWidget(
+                        fit: BoxFit.cover,
+                        imagePath: index == 0
+                            ? AppImageManager.car2
+                            : AppImageManager.car1,
+                      )),
+                );
+              },
+            ),
           ),
-          items: List.generate(
-            2,
-            (index) {
-              return InkWell(
-                onTap: () {},
-                child: Container(
-                    width: AppWidthManager.w92,
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(AppRadiusManager.r10)),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: MainImageWidget(
-                      fit: BoxFit.fitWidth,
-                      imagePath: index == 0
-                          ? AppImageManager.car1
-                          : AppImageManager.car2,
-                    )),
-              );
-            },
+          SizedBox(
+            height: AppHeightManager.h1point8,
           ),
-        ),
-        SizedBox(
-          height: AppHeightManager.h1point8,
-        ),
-        DotsIndicator(
-          dotsCount: 2,
-          position: selectedIndex,
-          decorator: DotsDecorator(
-            spacing: EdgeInsets.only(
-                left: AppWidthManager.w1Point8,
-                right: AppWidthManager.w1Point8),
-            activeShape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                AppRadiusManager.r10,
+          DotsIndicator(
+            dotsCount: 2,
+            position: selectedIndex,
+            decorator: DotsDecorator(
+              spacing: EdgeInsets.only(
+                  left: AppWidthManager.w1Point8,
+                  right: AppWidthManager.w1Point8),
+              activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  AppRadiusManager.r10,
+                ),
               ),
+              activeSize: Size(
+                AppWidthManager.w6,
+                AppHeightManager.h08,
+              ),
+              size: Size(
+                AppWidthManager.w1Point5,
+                AppWidthManager.w1Point5,
+              ),
+              activeColor: AppColorManager.mainColor,
+              color: AppColorManager.lightGreyOpacity6,
             ),
-            activeSize: Size(
-              AppWidthManager.w6,
-              AppHeightManager.h08,
-            ),
-            size: Size(
-              AppWidthManager.w1Point5,
-              AppWidthManager.w1Point5,
-            ),
-            activeColor: AppColorManager.mainColor,
-            color: AppColorManager.lightGreyOpacity6,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

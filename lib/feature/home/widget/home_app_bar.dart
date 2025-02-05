@@ -1,3 +1,4 @@
+import 'package:car_rental_app/feature/main/main_bottom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,7 +31,7 @@ class HomeAppBar extends StatelessWidget {
             SvgPicture.asset(
               AppIconManager.key,
               colorFilter:
-                  ColorFilter.mode(AppColorManager.black, BlendMode.srcIn),
+              ColorFilter.mode(AppColorManager.black, BlendMode.srcIn),
             )
           ],
         ),
@@ -48,7 +49,15 @@ class HomeAppBar extends StatelessWidget {
           children: [
             Expanded(
               child: AppTextFormField(
-                borderRadius: AppRadiusManager.r30,
+                readOnly: true,
+                onTap: () {
+                  selectedIndex=1;
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) {
+                      return MainBottomAppBar();
+                    },), (route) => false,);
+                },
+                borderRadius: AppRadiusManager.r10,
                 prefixIcon: Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: AppWidthManager.w4,

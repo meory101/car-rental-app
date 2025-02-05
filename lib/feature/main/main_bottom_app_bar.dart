@@ -1,4 +1,5 @@
 import 'package:car_rental_app/feature/home/screen/home_screen.dart';
+import 'package:car_rental_app/feature/search/screen/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,7 +26,7 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
   void initState() {
     bottomBarScreens = [
       HomeScreen(),
-      MoreScreen(),
+      SearchScreen(),
       MoreScreen(),
       MoreScreen(),
     ];
@@ -46,7 +47,7 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
           child: Container(
             decoration: BoxDecoration(
               color: AppColorManager.black,
-              borderRadius: BorderRadius.circular(AppRadiusManager.r30),
+              borderRadius: BorderRadius.circular(AppRadiusManager.r15),
             ),
             padding: EdgeInsets.only(
               top: AppWidthManager.w3Point8,
