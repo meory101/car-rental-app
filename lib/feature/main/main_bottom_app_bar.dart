@@ -1,9 +1,11 @@
+import 'package:car_rental_app/feature/home/screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../core/resource/color_manager.dart';
 import '../../core/resource/icon_manager.dart';
+import '../../core/resource/size_manager.dart';
 import '../../core/widget/text/app_text_widget.dart';
 import '../more/more_screen.dart';
 
@@ -22,7 +24,7 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
   @override
   void initState() {
     bottomBarScreens = [
-      MoreScreen(),
+      HomeScreen(),
       MoreScreen(),
       MoreScreen(),
       MoreScreen(),
@@ -34,125 +36,127 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColorManager.white,
+        backgroundColor: AppColorManager.background,
         bottomNavigationBar: BottomAppBar(
-          color: AppColorManager.white,
-          // height: 100,
+          color: AppColorManager.background,
+
+          height: AppHeightManager.h12,
           elevation: 0,
           child: Container(
-             margin: EdgeInsets.symmetric(vertical: 5,horizontal: 16),
-            // padding: EdgeInsets.symmetric(vertical: 5,horizontal: 16),
+
             decoration: BoxDecoration(
-                color: AppColorManager.white,
-                // borderRadius: BorderRadius.circular(25)
+
+              color: AppColorManager.black,
+              borderRadius: BorderRadius.circular(AppRadiusManager.r30),
+            ),
+            padding: EdgeInsets.only(
+              top: AppWidthManager.w3,
+              bottom: AppWidthManager.w1,
+              left: AppWidthManager.w3,
+              right: AppWidthManager.w3,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 InkWell(
-                  overlayColor:
-                      const WidgetStatePropertyAll(AppColorManager.transparent),
+                  overlayColor: const WidgetStatePropertyAll(
+                      AppColorManager.transparent),
                   onTap: () {
                     setState(() {
                       selectedIndex = 0;
                     });
                   },
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SvgPicture.asset(AppIconManager.home,
                           colorFilter: ColorFilter.mode(
                               selectedIndex == 0
                                   ? AppColorManager.mainColor
-                                  : AppColorManager.grey,
+                                  : AppColorManager.white,
                               BlendMode.srcIn)),
                       AppTextWidget(
                         text: "home",
                         color: selectedIndex == 0
                             ? AppColorManager.mainColor
-                            : AppColorManager.grey,
+                            : AppColorManager.white,
                       ),
                     ],
                   ),
                 ),
                 InkWell(
-                  overlayColor:
-                      const WidgetStatePropertyAll(AppColorManager.transparent),
+                  overlayColor: const WidgetStatePropertyAll(
+                      AppColorManager.transparent),
                   onTap: () {
                     setState(() {
                       selectedIndex = 1;
                     });
                   },
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(AppIconManager.home,
+                      SvgPicture.asset(AppIconManager.search,
                           colorFilter: ColorFilter.mode(
                               selectedIndex == 1
                                   ? AppColorManager.mainColor
-                                  : AppColorManager.grey,
+                                  : AppColorManager.white,
                               BlendMode.srcIn)),
+                      SizedBox(height: AppHeightManager.h05,),
                       AppTextWidget(
-                        text: "bidding",
+                        text: "Search",
                         color: selectedIndex == 1
                             ? AppColorManager.mainColor
-                            : AppColorManager.grey,
+                            : AppColorManager.white,
                       ),
                     ],
                   ),
                 ),
                 InkWell(
-                  overlayColor:
-                      const WidgetStatePropertyAll(AppColorManager.transparent),
+                  overlayColor: const WidgetStatePropertyAll(
+                      AppColorManager.transparent),
                   onTap: () {
                     setState(() {
                       selectedIndex = 2;
                     });
                   },
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(AppIconManager.person,
+                      SvgPicture.asset(AppIconManager.key,
                           colorFilter: ColorFilter.mode(
                               selectedIndex == 2
                                   ? AppColorManager.mainColor
-                                  : AppColorManager.grey,
+                                  : AppColorManager.white,
                               BlendMode.srcIn)),
+
                       AppTextWidget(
-                        text: "profile",
+                        text: "Bookings",
                         color: selectedIndex == 2
                             ? AppColorManager.mainColor
-                            : AppColorManager.grey,
+                            : AppColorManager.white,
                       ),
                     ],
                   ),
                 ),
                 InkWell(
-                  overlayColor:
-                      const WidgetStatePropertyAll(AppColorManager.transparent),
+                  overlayColor: const WidgetStatePropertyAll(
+                      AppColorManager.transparent),
                   onTap: () {
                     setState(() {
                       selectedIndex = 3;
                     });
                   },
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(AppIconManager.more,
+                      SvgPicture.asset(AppIconManager.person,
                           colorFilter: ColorFilter.mode(
                               selectedIndex == 3
                                   ? AppColorManager.mainColor
-                                  : AppColorManager.grey,
+                                  : AppColorManager.white,
                               BlendMode.srcIn)),
                       AppTextWidget(
-                        text: "more",
+                        text: "profile",
                         color: selectedIndex == 3
                             ? AppColorManager.mainColor
-                            : AppColorManager.grey,
+                            : AppColorManager.white,
                       ),
                     ],
                   ),
@@ -168,5 +172,6 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
           },
           child: bottomBarScreens[selectedIndex],
         ));
+
   }
 }

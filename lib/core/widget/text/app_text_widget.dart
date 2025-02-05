@@ -1,3 +1,4 @@
+import 'package:car_rental_app/core/resource/font_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../resource/color_manager.dart';
@@ -63,7 +64,8 @@ class _AppTextWidgetState extends State<AppTextWidget> {
           textDirection: widget.textDirection,
           style: TextStyle(
             letterSpacing: -0.4,
-            fontSize: widget.fontSize ??13,
+            fontFamily: 'Cairo',
+            fontSize: widget.fontSize ??FontSizeManager.fs14,
             fontWeight: widget.fontWeight,
             color: widget.color,
             decoration: widget.textDecoration,

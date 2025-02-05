@@ -1,3 +1,4 @@
+import 'package:car_rental_app/core/resource/font_manager.dart';
 import 'package:flutter/material.dart';
 import '../../resource/color_manager.dart';
 
@@ -104,7 +105,9 @@ class AppTextFormField extends StatelessWidget {
         prefixIcon: prefixIcon,
         hintStyle: hintStyle ??TextStyle(
             color: AppColorManager.grey,
-            fontSize: 15
+            fontSize: FontSizeManager.fs15,
+          fontFamily: 'Cairo',
+
         ),
         prefixIconColor: Colors.grey,
         suffixIconColor: Colors.grey,
@@ -114,11 +117,15 @@ class AppTextFormField extends StatelessWidget {
         labelText: labelText,
         labelStyle: TextStyle(
             color: labelColor,
-            fontSize:16,
-            fontWeight: FontWeight.bold,
+          fontSize: FontSizeManager.fs16,
+          fontFamily: 'Cairo',
+
+          fontWeight: FontWeight.bold,
             ),
         errorStyle: TextStyle(
           fontSize: 14,
+          fontFamily: 'Cairo',
+
 
         ),
         errorBorder: OutlineInputBorder(
@@ -157,7 +164,8 @@ class AppTextFormField extends StatelessWidget {
       style: style ??
           TextStyle(
               color: textColor,
-              fontSize: 16,
+              fontFamily: 'Cairo',
+              fontSize: FontSizeManager.fs16,
            ),
     );
   }

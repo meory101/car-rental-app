@@ -1,3 +1,4 @@
+import 'package:car_rental_app/core/resource/font_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../resource/color_manager.dart';
@@ -47,7 +48,7 @@ class TitleAppFormFiled extends StatelessWidget {
       children: [
         AppTextWidget(
           text: title,
-          fontSize: 16,
+          fontSize: FontSizeManager.fs16,
           fontWeight: FontWeight.w600,
         ),
         SizedBox(
