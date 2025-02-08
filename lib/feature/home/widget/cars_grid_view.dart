@@ -1,10 +1,14 @@
+import 'package:car_rental_app/core/resource/size_manager.dart';
+import 'package:car_rental_app/core/widget/text/app_text_widget.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../models/cars_response_entity.dart';
 import 'car_card.dart';
 
 class CarsGridView extends StatefulWidget {
-  const CarsGridView({super.key});
+ final List<CarsResponseEntity> cars;
+  const CarsGridView({super.key,required this.cars});
 
   @override
   State<CarsGridView> createState() => _CarsGridViewState();
@@ -13,13 +17,22 @@ class CarsGridView extends StatefulWidget {
 class _CarsGridViewState extends State<CarsGridView> {
   @override
   Widget build(BuildContext context) {
-    return DynamicHeightGridView(
+    return
+      widget.cars.isEmpty ?
+          Padding(
+            padding:  EdgeInsets.only(top: AppHeightManager.h10),
+            child: AppTextWidget(text: "No Cars"),
+          )
+          :
+      DynamicHeightGridView(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         builder: (context, index) {
-          return CarCard();
+          return CarCard(
+            car: widget.cars[index],
+          );
         },
-        itemCount: 10,
+        itemCount: widget.cars.length,
         crossAxisCount: 2);
   }
 }

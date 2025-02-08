@@ -29,7 +29,7 @@ class PriceTextWidget extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text: '999,999',
+              text: price,
               style:priceStyle?? TextStyle(
                 decoration: isOldPrice == true
                     ? TextDecoration.lineThrough

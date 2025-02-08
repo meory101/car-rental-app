@@ -1,4 +1,5 @@
 import 'package:car_rental_app/core/widget/image/main_image_widget.dart';
+import 'package:car_rental_app/feature/home/models/cars_response_entity.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,12 +9,14 @@ import '../../../../core/resource/color_manager.dart';
 import '../../../../core/resource/size_manager.dart';
 import '../../../core/resource/icon_manager.dart';
 
-
 class ProductDetailsImageSlider extends StatefulWidget {
-  const ProductDetailsImageSlider({super.key});
+  final CarsResponseEntity car;
+
+  const ProductDetailsImageSlider({super.key, required this.car});
 
   @override
-  State<ProductDetailsImageSlider> createState() => _ProductDetailsImageSliderState();
+  State<ProductDetailsImageSlider> createState() =>
+      _ProductDetailsImageSliderState();
 }
 
 class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
@@ -21,7 +24,7 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         CarouselSlider(
           options: CarouselOptions(
@@ -33,31 +36,37 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
             aspectRatio: AppWidthManager.w80 / AppHeightManager.h30,
             enableInfiniteScroll: true,
             autoPlay: false,
-
             viewportFraction: 0.8,
-
           ),
           items: List.generate(
-            10,
-                (index) {
+            3,
+            (index) {
               return InkWell(
                 onTap: () {},
                 child: Container(
                     margin: EdgeInsets.only(
                       left: 4,
-                        right: 4,
-                        top: selectedProductImageIndex==index ? 0:AppHeightManager.h5,
-                        bottom: selectedProductImageIndex==index ? 0:AppHeightManager.h5,
+                      right: 4,
+                      top: selectedProductImageIndex == index
+                          ? 0
+                          : AppHeightManager.h5,
+                      bottom: selectedProductImageIndex == index
+                          ? 0
+                          : AppHeightManager.h5,
                     ),
                     width: AppWidthManager.w80,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                            AppRadiusManager.r10)),
+                        borderRadius:
+                            BorderRadius.circular(AppRadiusManager.r10)),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: MainImageWidget(
                       fit: BoxFit.cover,
-                        imagePath: AppImageManager.car3
-
+                      imageUrl: index == 0
+                          ? widget.car.image1 ?? ""
+                          : index == 1
+                              ? widget.car.image2 ??""
+                              : widget.car.image3 ??"",
+                      // imagePath: AppImageManager.car3
                     )),
               );
             },
@@ -67,14 +76,11 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
           height: AppHeightManager.h1point8,
         ),
         DotsIndicator(
-          dotsCount: 10,
+          dotsCount: 3,
           position: selectedProductImageIndex,
           decorator: DotsDecorator(
             spacing: EdgeInsets.only(
-                left:  AppWidthManager.w1,
-
-                right:  AppWidthManager.w1
-                   ),
+                left: AppWidthManager.w1, right: AppWidthManager.w1),
             activeShape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
                 AppRadiusManager.r10,

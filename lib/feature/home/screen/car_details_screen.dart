@@ -9,12 +9,16 @@ import '../../../core/resource/font_manager.dart';
 import '../../../core/resource/icon_manager.dart';
 import '../../../core/widget/button/main_app_button.dart';
 import '../../../core/widget/text/app_text_widget.dart';
+import '../../../core/widget/text/price_text_widget.dart';
+import '../models/cars_response_entity.dart';
 import '../widget/car_main_info.dart';
 import '../widget/product_details_image_slider.dart';
 import '../widget/product_more_details_expansion_card.dart';
 
 class CarDetailsScreen extends StatefulWidget {
-  const CarDetailsScreen({super.key});
+  final CarsResponseEntity car;
+
+  const CarDetailsScreen({super.key, required this.car});
 
   @override
   State<CarDetailsScreen> createState() => _CarDetailsScreenState();
@@ -22,6 +26,7 @@ class CarDetailsScreen extends StatefulWidget {
 
 class _CarDetailsScreenState extends State<CarDetailsScreen> {
   int selectedPlan = -1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,19 +46,17 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
             width: AppWidthManager.w30,
             child: InkWell(
               onTap: () {
-                showModalBottomSheet(context: context,
+                showModalBottomSheet(
+                  context: context,
                   backgroundColor: AppColorManager.background,
-
                   builder: (context) {
-                  return StatefulBuilder(
-                    builder: (context, setState) {
+                    return StatefulBuilder(builder: (context, setState) {
                       return Container(
                         height: AppHeightManager.h40,
                         margin: EdgeInsets.all(AppWidthManager.w3Point8),
                         width: AppWidthManager.w90,
-                        decoration: BoxDecoration(
-                          color: AppColorManager.background
-                        ),
+                        decoration:
+                            BoxDecoration(color: AppColorManager.background),
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,14 +64,15 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    selectedPlan=0;
+                                    selectedPlan = 0;
                                   });
                                 },
                                 child: MainAppButton(
-                                  outLinedBorde: selectedPlan==0 ?true:false,
-
+                                  outLinedBorde:
+                                      selectedPlan == 0 ? true : false,
                                   alignment: Alignment.center,
-                                  margin: EdgeInsets.all(AppWidthManager.w3Point8),
+                                  margin:
+                                      EdgeInsets.all(AppWidthManager.w3Point8),
                                   color: AppColorManager.background,
                                   width: AppWidthManager.w90,
                                   height: AppHeightManager.h6,
@@ -85,14 +89,15 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    selectedPlan=1;
+                                    selectedPlan = 1;
                                   });
                                 },
                                 child: MainAppButton(
-                                  outLinedBorde: selectedPlan==1 ?true:false,
-
+                                  outLinedBorde:
+                                      selectedPlan == 1 ? true : false,
                                   alignment: Alignment.center,
-                                  margin: EdgeInsets.all(AppWidthManager.w3Point8),
+                                  margin:
+                                      EdgeInsets.all(AppWidthManager.w3Point8),
                                   color: AppColorManager.background,
                                   width: AppWidthManager.w90,
                                   height: AppHeightManager.h6,
@@ -106,18 +111,18 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                   ),
                                 ),
                               ),
-
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    selectedPlan=2;
+                                    selectedPlan = 2;
                                   });
                                 },
                                 child: MainAppButton(
-                                  outLinedBorde: selectedPlan==2 ?true:false,
-
+                                  outLinedBorde:
+                                      selectedPlan == 2 ? true : false,
                                   alignment: Alignment.center,
-                                  margin: EdgeInsets.all(AppWidthManager.w3Point8),
+                                  margin:
+                                      EdgeInsets.all(AppWidthManager.w3Point8),
                                   color: AppColorManager.background,
                                   width: AppWidthManager.w90,
                                   height: AppHeightManager.h6,
@@ -131,16 +136,19 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: AppHeightManager.h3,),
-
+                              SizedBox(
+                                height: AppHeightManager.h3,
+                              ),
                               MainAppButton(
                                 onTap: () {
                                   Navigator.of(context).pop();
                                 },
-                                padding: EdgeInsets.symmetric(horizontal: AppWidthManager.w3Point8),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: AppWidthManager.w3Point8),
                                 alignment: Alignment.center,
                                 color: AppColorManager.black,
-                                borderRadius: BorderRadius.circular(AppRadiusManager.r15),
+                                borderRadius:
+                                    BorderRadius.circular(AppRadiusManager.r15),
                                 borderColor: AppColorManager.lightGreyOpacity6,
                                 height: AppHeightManager.h7,
                                 width: AppWidthManager.w90,
@@ -154,15 +162,15 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                   maxLines: 1,
                                 ),
                               ),
-
-
                             ],
                           ),
                         ),
                       );
-                    }
-                  );
-                },);
+                    });
+                  },
+                ).then(
+                  (value) => setState(() {}),
+                );
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -211,7 +219,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
             SizedBox(
               height: AppHeightManager.h2,
             ),
-            ProductDetailsImageSlider(),
+            ProductDetailsImageSlider(car: widget.car,),
             SizedBox(
               height: AppHeightManager.h1point8,
             ),
@@ -221,11 +229,53 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CarMainInfo(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: AppHeightManager.h1point8,
+                      ),
+                      AppTextWidget(
+                        text: widget.car.description ?? "",
+                        fontSize: FontSizeManager.fs15,
+                        fontWeight: FontWeight.w600,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                      SizedBox(
+                        height: AppHeightManager.h1point8,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          PriceTextWidget(
+                            currency: "",
+                            price: selectedPlan == 0
+                                ? "day ${widget.car.dailyRentPrice}"
+                                : selectedPlan == 1
+                                    ? "month ${widget.car.monthlyRentPrice}"
+                                    : selectedPlan == 2
+                                        ? "year ${widget.car.yearlyRentPrice}"
+                                        : "",
+                            priceStyle: TextStyle(
+                              fontSize: FontSizeManager.fs16,
+                              color: AppColorManager.textAppColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: AppHeightManager.h2point5,
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     height: AppHeightManager.h2,
                   ),
-                  ProductMoreDetailsExpansionCard(),
+                  ProductMoreDetailsExpansionCard(
+                    car: widget.car,
+                  ),
                   SizedBox(
                     height: AppHeightManager.h10,
                   ),

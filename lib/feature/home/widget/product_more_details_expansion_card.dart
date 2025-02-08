@@ -6,11 +6,13 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/resource/font_manager.dart';
 import '../../../../core/resource/icon_manager.dart';
 import '../../../../core/widget/text/app_text_widget.dart';
+import '../models/cars_response_entity.dart';
 import 'expansion_list.dart';
 
 
 class ProductMoreDetailsExpansionCard extends StatefulWidget {
-  const ProductMoreDetailsExpansionCard({super.key});
+  final CarsResponseEntity car;
+  const ProductMoreDetailsExpansionCard({super.key,required this.car});
 
   @override
   State<ProductMoreDetailsExpansionCard> createState() =>
@@ -60,6 +62,7 @@ class _ProductMoreDetailsExpansionCardState
                       bottom: AppHeightManager.h3),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       AppTextWidget(
                         text: "Car Model",
@@ -69,7 +72,7 @@ class _ProductMoreDetailsExpansionCardState
                         maxLines: 1,
                       ),
                       AppTextWidget(
-                        text: "BMW",
+                        text: "${widget.car.model}",
                         fontSize: FontSizeManager.fs15,
                         fontWeight: FontWeight.w400,
                         overflow: TextOverflow.ellipsis,
@@ -86,7 +89,8 @@ class _ProductMoreDetailsExpansionCardState
                         maxLines: 1,
                       ),
                       AppTextWidget(
-                        text:"Brand",
+                        text: "${widget.car.brand}",
+
                         fontSize: FontSizeManager.fs15,
                         fontWeight: FontWeight.w400,
                         overflow: TextOverflow.ellipsis,
@@ -103,8 +107,7 @@ class _ProductMoreDetailsExpansionCardState
                         maxLines: 1,
                       ),
                       AppTextWidget(
-                        text:
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+                        text: "${widget.car.description}",
                         fontSize: FontSizeManager.fs15,
                         fontWeight: FontWeight.w400,
                         overflow: TextOverflow.ellipsis,

@@ -10,11 +10,13 @@ import '../../../../core/widget/text/app_text_widget.dart';
 import '../../../core/resource/icon_manager.dart';
 import '../../../core/widget/button/main_app_button.dart';
 import '../../../core/widget/text/price_text_widget.dart';
+import '../models/cars_response_entity.dart';
 
 
 
 class CarMainInfo extends StatefulWidget {
-  const CarMainInfo({super.key});
+  final CarsResponseEntity car ;
+  const CarMainInfo({super.key,required this.car});
 
   @override
   State<CarMainInfo> createState() => _CarMainInfoState();
@@ -28,46 +30,13 @@ class _CarMainInfoState extends State<CarMainInfo> {
     return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: AppHeightManager.h2,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: AppWidthManager.w7,
-                  height: AppWidthManager.w7,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: MainImageWidget(imageUrl: ""),
-                  ),
-                ),
-                SizedBox(
-                  width: AppWidthManager.w1Point2,
-                ),
-                AppTextWidget(
-                  text: "nss,ss,,s,,,ss",
-                  fontSize: FontSizeManager.fs15,
-                  fontWeight: FontWeight.w400,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-              ],
-            ),
 
-          ],
-        ),
         SizedBox(
           height: AppHeightManager.h1point8,
         ),
         AppTextWidget(
           text:
-          "Car name Car name Product na me Car name Car name",
+          widget.car.description ??"",
           fontSize: FontSizeManager.fs15,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
@@ -81,7 +50,7 @@ class _CarMainInfoState extends State<CarMainInfo> {
           children: [
             PriceTextWidget(
               currency: "",
-              price: "999",
+              price: "daily ${widget.car.dailyRentPrice}",
               priceStyle: TextStyle(
                 fontSize: FontSizeManager.fs16,
                 color: AppColorManager.textAppColor,
