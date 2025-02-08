@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app/app.dart';
+import 'core/helper/hive_hepler.dart';
 import 'core/resource/color_manager.dart';
 import 'core/storage/shared/shared_pref.dart';
 
@@ -10,6 +11,7 @@ void main() async {
 
   SharedPreferences shPref = await SharedPreferences.getInstance();
   AppSharedPreferences.init(shPref);
+  await HiveHelper.init();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

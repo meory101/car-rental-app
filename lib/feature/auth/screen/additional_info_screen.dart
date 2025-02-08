@@ -62,8 +62,6 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
     }
     RegisterRequestEntity entity = widget.registerRequestEntity;
     entity.idNumber  = idNumber.text;
-    print(entity.idNumber);
-    print('00000000000000000000000000000000000000');
     http.Response response =
     await HttpMethods().postMethod(ApiPostUrl.register, entity.toJson());
     AuthResponseEntity authResponseEntity;
