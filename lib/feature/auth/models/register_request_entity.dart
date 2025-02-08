@@ -73,9 +73,37 @@ RegisterRequestEntity copyWith({  String? firstName,
     map['email'] = _email;
     map['username'] = _username;
     map['password'] = _password;
-    map['account_type'] = _accountType;
+    map['account_type'] = "customer";
     map['phone'] = _phone;
+    print(map);
     return map;
   }
 
+  set phone(String? value) {
+    _phone = value;
+  }
+
+  set accountType(String? value) {
+    _accountType = value;
+  }
+
+  set password(String? value) {
+    _password = value;
+  }
+
+  set username(String? value) {
+    _username = value;
+  }
+
+  set email(String? value) {
+    _email = value;
+  }
+
+  set lastName(String? value) {
+    _lastName = value;
+  }
+
+  set firstName(String? value) {
+    _firstName = value;
+  }
 }

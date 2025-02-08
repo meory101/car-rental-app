@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: AppTextWidget(
-            text: "Failed To Login",
+            text: response.body.toString(),
             color: AppColorManager.white,
             fontSize: FontSizeManager.fs14,
             fontWeight: FontWeight.w700,

@@ -2,17 +2,24 @@ import 'package:car_rental_app/core/resource/icon_manager.dart';
 import 'package:car_rental_app/core/resource/validation_helper.dart';
 import 'package:car_rental_app/core/widget/container/decorated_container.dart';
 import 'package:car_rental_app/core/widget/image/main_image_widget.dart';
+import 'package:car_rental_app/feature/auth/models/register_request_entity.dart';
 import 'package:car_rental_app/feature/auth/screen/additional_info_screen.dart';
 import 'package:car_rental_app/feature/auth/screen/login_screen.dart';
 import 'package:car_rental_app/feature/main/main_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../core/api/api_links.dart';
+import '../../../core/api/api_methods.dart';
 import '../../../core/resource/color_manager.dart';
 import '../../../core/resource/font_manager.dart';
 import '../../../core/resource/size_manager.dart';
+import '../../../core/storage/shared/shared_pref.dart';
 import '../../../core/widget/button/main_app_button.dart';
 import '../../../core/widget/form_field/title_app_form_filed.dart';
 import '../../../core/widget/text/app_text_widget.dart';
+import 'package:http/http.dart' as http;
+
+import '../models/auth_response_entity.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -22,10 +29,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController name = TextEditingController();
-  final TextEditingController email = TextEditingController();
-  final TextEditingController password = TextEditingController();
+
   final GlobalKey<FormState> fkey = GlobalKey();
+  RegisterRequestEntity registerRequestEntity = RegisterRequestEntity();
+  int status = -1;
 
   void onSignInClicked() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -36,19 +43,54 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void onSignUpClicked() async {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) {
-        return AdditionalInfoScreen();
-      },
-    ));
+    if (fkey.currentState?.validate() == false) return;
+    setState(() {
+      status = 0;
+    });
+    http.Response response =
+    await HttpMethods().postMethod(ApiPostUrl.user, registerRequestEntity.toJson());
+    AuthResponseEntity authResponseEntity;
+    if (response.statusCode == 200) {
+      setState(() {
+        status = 1;
+      });
+
+      if((response.body??"").isNotEmpty){
+        authResponseEntity = authResponseEntityFromJson(response.body);
+        AppSharedPreferences.cashToken(token: authResponseEntity.access ?? "");
+      }
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) {
+            return AdditionalInfoScreen();
+          },
+        ),
+            (route) => false,
+      );
+    } else {
+      setState(() {
+        status = 2;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: AppTextWidget(
+            text: response.body.toString(),
+            color: AppColorManager.white,
+            fontSize: FontSizeManager.fs14,
+            fontWeight: FontWeight.w700,
+            overflow: TextOverflow.visible,
+          ),
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorManager.background,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
+      bottomSheet: Container(
         height: AppHeightManager.h10,
         color: AppColorManager.background,
         child: Row(
@@ -138,7 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hint: "First Name",
                       title: "First Name",
                       onChanged: (value) {
-                        name.text = value ?? "";
+                        registerRequestEntity.firstName = value??"";
                         return null;
                       },
                       validator: (value) {
@@ -155,7 +197,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hint: "Last Name",
                       title: "Last Name",
                       onChanged: (value) {
-                        name.text = value ?? "";
+                        registerRequestEntity.lastName = value??"";
+
+                        return null;
+                      },
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return "Empty Field";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: AppHeightManager.h1point8,
+                    ),
+                    TitleAppFormFiled(
+                      hint: "Username",
+                      title: "Username",
+                      onChanged: (value) {
+                        registerRequestEntity.username = value??"";
+
                         return null;
                       },
                       validator: (value) {
@@ -172,7 +233,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hint: "Email Address",
                       title: "Email Address",
                       onChanged: (value) {
-                        email.text = value ?? "";
+                        registerRequestEntity.email = value??"";
                         return null;
                       },
                       validator: (value) {
@@ -189,18 +250,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: AppHeightManager.h1point8,
                     ),
                     TitleAppFormFiled(
-                      hint: "Password",
-                      title: "Password",
+                      hint: "Phone Number",
+                      title: "Phone Number",
                       onChanged: (value) {
-                        password.text = value ?? "";
+                        registerRequestEntity.phone = value??"";
                         return null;
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
                           return "Empty Field";
                         }
-                        if ((value?.length ?? 0) < 6) {
-                          return "Invalid Password";
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: AppHeightManager.h1point8,
+                    ),
+                    TitleAppFormFiled(
+                      hint: "Password",
+                      title: "Password",
+                      onChanged: (value) {
+                        registerRequestEntity.password = value??"";
+                        return null;
+                      },
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'required';
+                        }
+                        if ((value?.length ?? 0) < 4) {
+                          return "At Least 4 ";
                         }
                         return null;
                       },
