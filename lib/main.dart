@@ -21,8 +21,9 @@ void main() async {
     systemNavigationBarIconBrightness: Brightness.dark,
     systemNavigationBarColor: AppColorManager.background,
   ));
-
   runApp(
     CarRentalApp(),
   );
 }
+
+

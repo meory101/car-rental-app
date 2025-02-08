@@ -1,6 +1,11 @@
+import 'package:car_rental_app/core/api/api_links.dart';
+import 'package:car_rental_app/core/storage/shared/shared_pref.dart';
+import 'package:car_rental_app/feature/auth/models/auth_response_entity.dart';
+import 'package:car_rental_app/feature/auth/models/login_request_entity.dart';
 import 'package:car_rental_app/feature/auth/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../core/api/api_methods.dart';
 import '../../../core/resource/color_manager.dart';
 import '../../../core/resource/font_manager.dart';
 import '../../../core/resource/icon_manager.dart';
@@ -9,7 +14,7 @@ import '../../../core/widget/button/main_app_button.dart';
 import '../../../core/widget/form_field/title_app_form_filed.dart';
 import '../../../core/widget/image/main_image_widget.dart';
 import '../../../core/widget/text/app_text_widget.dart';
-
+import 'package:http/http.dart' as http;
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -18,10 +23,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController email = TextEditingController();
+  final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
   final GlobalKey<FormState> fkey = GlobalKey();
-
+  LoginRequestEntity entity = LoginRequestEntity();
   void onSignUpClicked() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
@@ -30,7 +35,29 @@ class _LoginScreenState extends State<LoginScreen> {
     ));
   }
 
-  void SignInClicked() async {}
+  void signInClicked() async {
+    entity.username = username.text;
+    entity.password = password.text;
+    http.Response response =
+    await HttpMethods().postMethod(ApiPostUrl.login,entity.toJson());
+    AuthResponseEntity authResponseEntity;
+    if (response.statusCode == 200) {
+      authResponseEntity = authResponseEntityFromJson(response.body);
+      AppSharedPreferences.cashToken(token: authResponseEntity.access??"");
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: AppTextWidget(
+            text: "Failed To Login",
+            color: AppColorManager.white,
+            fontSize: FontSizeManager.fs14,
+            fontWeight: FontWeight.w700,
+            overflow: TextOverflow.visible,
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: AppHeightManager.h5,
                     ),
                     TitleAppFormFiled(
-                      hint: "Email Address",
-                      title: "Email Address",
+                      hint: "Username",
+                      title: "Username",
                       onChanged: (value) {
-                        email.text = value ?? "";
+                        username.text = value ?? "";
                         return null;
                       },
                       validator: (value) {
@@ -129,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         MainAppButton(
-                          onTap: SignInClicked,
+                          onTap: signInClicked,
                           alignment: Alignment.center,
                           width: AppWidthManager.w30,
                           height: AppHeightManager.h5,

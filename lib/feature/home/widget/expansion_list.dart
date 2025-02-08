@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-/// Eng.Nour Othman(meory)*
-/// 26 Dec 2024
+
 
 const double _kPanelHeaderCollapsedHeight = kMinInteractiveDimension;
 const EdgeInsets _kPanelHeaderExpandedDefaultPadding = EdgeInsets.symmetric(

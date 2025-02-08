@@ -51,7 +51,7 @@ class _CarMainInfoState extends State<CarMainInfo> {
                   width: AppWidthManager.w1Point2,
                 ),
                 AppTextWidget(
-                  text: "Nour Nour",
+                  text: "nss,ss,,s,,,ss",
                   fontSize: FontSizeManager.fs15,
                   fontWeight: FontWeight.w400,
                   overflow: TextOverflow.ellipsis,
