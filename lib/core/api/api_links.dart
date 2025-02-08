@@ -9,7 +9,7 @@ class ApiGetUrl {
 
 class ApiPostUrl {
   static  String login = '${_baseUrl}account/login/';
-  static  String user = '${_baseUrl}account/user/';
+  static  String register = '${_baseUrl}account/register/';
 
 }
 

@@ -5,19 +5,13 @@ import 'package:car_rental_app/core/widget/image/main_image_widget.dart';
 import 'package:car_rental_app/feature/auth/models/register_request_entity.dart';
 import 'package:car_rental_app/feature/auth/screen/additional_info_screen.dart';
 import 'package:car_rental_app/feature/auth/screen/login_screen.dart';
-import 'package:car_rental_app/feature/main/main_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../core/api/api_links.dart';
-import '../../../core/api/api_methods.dart';
 import '../../../core/resource/color_manager.dart';
 import '../../../core/resource/font_manager.dart';
 import '../../../core/resource/size_manager.dart';
-import '../../../core/storage/shared/shared_pref.dart';
 import '../../../core/widget/button/main_app_button.dart';
 import '../../../core/widget/form_field/title_app_form_filed.dart';
 import '../../../core/widget/text/app_text_widget.dart';
-import 'package:http/http.dart' as http;
 
 import '../models/auth_response_entity.dart';
 
@@ -42,49 +36,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
     ));
   }
 
-  void onSignUpClicked() async {
+  void onNextClicked() async {
     if (fkey.currentState?.validate() == false) return;
-    setState(() {
-      status = 0;
-    });
-    http.Response response =
-    await HttpMethods().postMethod(ApiPostUrl.user, registerRequestEntity.toJson());
-    AuthResponseEntity authResponseEntity;
-    if (response.statusCode == 200) {
-      setState(() {
-        status = 1;
-      });
 
-      if((response.body??"").isNotEmpty){
-        authResponseEntity = authResponseEntityFromJson(response.body);
-        AppSharedPreferences.cashToken(token: authResponseEntity.access ?? "");
-      }
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) {
-            return AdditionalInfoScreen();
-          },
-        ),
-            (route) => false,
-      );
-    } else {
-      setState(() {
-        status = 2;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: AppTextWidget(
-            text: response.body.toString(),
-            color: AppColorManager.white,
-            fontSize: FontSizeManager.fs14,
-            fontWeight: FontWeight.w700,
-            overflow: TextOverflow.visible,
-          ),
-        ),
-      );
-    }
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) {
+          return AdditionalInfoScreen(
+            registerRequestEntity: registerRequestEntity,
+          );
+        },
+      ),
+          (route) => false,
+    );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -97,13 +64,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MainAppButton(
-              onTap: onSignUpClicked,
+              onTap: onNextClicked,
               alignment: Alignment.center,
               width: AppWidthManager.w30,
               height: AppHeightManager.h5,
               color: AppColorManager.black,
               child: AppTextWidget(
-                text: "Sign Up",
+                text: "Next",
                 color: AppColorManager.white,
                 fontSize: FontSizeManager.fs15,
                 fontWeight: FontWeight.w600,

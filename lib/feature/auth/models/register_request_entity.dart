@@ -16,11 +16,13 @@ class RegisterRequestEntity {
       String? email, 
       String? username, 
       String? password, 
-      String? accountType, 
+      String? accountType,
+    String? idNumber,
       String? phone,}){
     _firstName = firstName;
     _lastName = lastName;
     _email = email;
+    _idNumber = idNumber;
     _username = username;
     _password = password;
     _accountType = accountType;
@@ -29,6 +31,7 @@ class RegisterRequestEntity {
 
   RegisterRequestEntity.fromJson(dynamic json) {
     _firstName = json['first_name'];
+    _idNumber = json['id_number'];
     _lastName = json['last_name'];
     _email = json['email'];
     _username = json['username'];
@@ -39,6 +42,7 @@ class RegisterRequestEntity {
   String? _firstName;
   String? _lastName;
   String? _email;
+  String? _idNumber;
   String? _username;
   String? _password;
   String? _accountType;
@@ -49,9 +53,11 @@ RegisterRequestEntity copyWith({  String? firstName,
   String? username,
   String? password,
   String? accountType,
+  String? idNumber,
   String? phone,
 }) => RegisterRequestEntity(  firstName: firstName ?? _firstName,
   lastName: lastName ?? _lastName,
+  idNumber: idNumber ?? _idNumber,
   email: email ?? _email,
   username: username ?? _username,
   password: password ?? _password,
@@ -59,6 +65,7 @@ RegisterRequestEntity copyWith({  String? firstName,
   phone: phone ?? _phone,
 );
   String? get firstName => _firstName;
+  String? get idNumber => _idNumber;
   String? get lastName => _lastName;
   String? get email => _email;
   String? get username => _username;
@@ -73,8 +80,8 @@ RegisterRequestEntity copyWith({  String? firstName,
     map['email'] = _email;
     map['username'] = _username;
     map['password'] = _password;
-    map['account_type'] = "customer";
     map['phone'] = _phone;
+    map['id_number'] = _idNumber;
     print(map);
     return map;
   }
@@ -106,4 +113,9 @@ RegisterRequestEntity copyWith({  String? firstName,
   set firstName(String? value) {
     _firstName = value;
   }
+
+  set idNumber(String? value) {
+    _idNumber = value;
+  }
+
 }

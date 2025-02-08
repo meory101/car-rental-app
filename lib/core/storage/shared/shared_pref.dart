@@ -20,17 +20,10 @@ abstract class AppSharedPreferences {
   static cashToken({required String token}) {
     _sharedPreferences.setString(AppKeyManager.token, token);
   }
-  static cashAccountType({required String accountType}) {
-    //0 user 1 company
-    _sharedPreferences.setString(AppKeyManager.accountType, accountType);
-  }
 
 
   static String getLanguage() {
     return _sharedPreferences.getString(AppKeyManager.language) ?? "ar";
-  }
-  static String getAccountType() {
-    return _sharedPreferences.getString(AppKeyManager.accountType) ?? '';
   }
 
   static String getToken() {

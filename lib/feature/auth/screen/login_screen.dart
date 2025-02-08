@@ -8,9 +8,11 @@ import 'package:car_rental_app/feature/main/main_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../core/api/api_methods.dart';
+import '../../../core/helper/hive_hepler.dart';
 import '../../../core/resource/color_manager.dart';
 import '../../../core/resource/font_manager.dart';
 import '../../../core/resource/icon_manager.dart';
+import '../../../core/resource/key_manger.dart';
 import '../../../core/resource/size_manager.dart';
 import '../../../core/widget/button/main_app_button.dart';
 import '../../../core/widget/form_field/title_app_form_filed.dart';
@@ -50,13 +52,17 @@ class _LoginScreenState extends State<LoginScreen> {
     http.Response response =
         await HttpMethods().postMethod(ApiPostUrl.login, entity.toJson());
     AuthResponseEntity authResponseEntity;
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       setState(() {
         status = 1;
       });
 
       authResponseEntity = authResponseEntityFromJson(response.body);
       AppSharedPreferences.cashToken(token: authResponseEntity.access ?? "");
+      HiveHelper.saveUser(
+          boxKey: AppKeyManager.userBox,
+          saveKey: AppKeyManager.userInfo,
+          entity: authResponseEntity);
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) {

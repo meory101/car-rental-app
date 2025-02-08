@@ -3,6 +3,8 @@ abstract class AppKeyManager {
   static const String arabicLocalizationCode = "ar";
   static const String englishLocalizationCode = "en";
   static const String token = "token";
+  static const String userBox = "userBox";
+  static const String userInfo = "userInfo";
   static const String authType = "authType";
   static const String accountType = "accountType";
   static const String userEmail = "userEmail";
