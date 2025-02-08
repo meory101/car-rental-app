@@ -123,9 +123,8 @@ class AppTextFormField extends StatelessWidget {
           fontWeight: FontWeight.bold,
             ),
         errorStyle: TextStyle(
-          fontSize: 14,
+          fontSize: FontSizeManager.fs14,
           fontFamily: 'Cairo',
-
 
         ),
         errorBorder: OutlineInputBorder(
