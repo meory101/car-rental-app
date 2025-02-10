@@ -24,7 +24,22 @@ import 'package:http/http.dart'as http;
   print(response.statusCode);
   return response;
   }
+  putMethod(String url,String id)async{
+    print('$url/$id/');
+    http.Response response = await  http.put(
+      Uri.parse('$url/$id/'),
+      // body: body,
 
+      headers: AppSharedPreferences.getToken().isNotEmpty ?{
+        "Accept": "application/json",
+        "Authorization": "Bearer ${AppSharedPreferences.getToken()}",
+      }:{},
+    );
+    print(AppSharedPreferences.getToken());
+    print(response.body);
+    print(response.statusCode);
+    return response;
+  }
   getMethod(String url,)async{
 
     http.Response response = await  http.get(

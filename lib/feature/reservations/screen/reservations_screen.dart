@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:car_rental_app/core/widget/button/main_app_button.dart';
+import 'package:car_rental_app/feature/main/main_bottom_app_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -46,6 +48,21 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     } else {}
     getReservations();
   }
+  void deleteReservation(String id) async {
+    http.Response response =
+    await HttpMethods().putMethod(ApiPostUrl.cancel,id);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      selectedIndex =2;
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) {
+            return MainBottomAppBar();
+          },
+        ),
+            (route) => false,
+      );    } else {}
+    getReservations();
+  }
 
 
   @override
@@ -57,7 +74,6 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   void getReservations({bool updateUI = true}) async {
     http.Response response =
     await HttpMethods().getMethod(ApiGetUrl.myReservations);
-
     if (response.statusCode == 200 ||
         response.statusCode == 201 ||
         response.statusCode == 404) {
@@ -219,6 +235,26 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                                     color: AppColorManager.mainColor,
                                   )
                                 ]),
+
+                            SizedBox(
+                              height: AppHeightManager.h2,
+                            ),
+
+                            MainAppButton(
+                              onTap: () {
+                                deleteReservation(reservations[index].idReservation.toString());
+                              },
+                              alignment: Alignment.center,
+                              width: AppWidthManager.w90,
+                              height: AppHeightManager.h5,
+                              color: AppColorManager.red,
+                              child:    AppTextWidget(
+                                text: "Cancel",
+                                fontSize: FontSizeManager.fs16,
+                                fontWeight: FontWeight.w600,
+                                color: AppColorManager.white,
+                              ),
+                            )
                           ]),
                         );
                       })
