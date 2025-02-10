@@ -157,6 +157,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                                  width: AppHeightManager.h10,
                                  imageUrl:car.image1 ??car.image2 ??car.image3,
                                ),
+                               SizedBox(width: AppWidthManager.w1Point2,),
                                Expanded(
                                  child: AppTextWidget(
                                    text:
