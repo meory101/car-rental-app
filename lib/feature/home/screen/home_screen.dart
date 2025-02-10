@@ -66,48 +66,53 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorManager.background,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(AppWidthManager.w3Point8),
-            child: Column(
-              children: [
-                HomeAppBar(),
-                SizedBox(
-                  height: AppHeightManager.h2point5,
-                ),
-                HomeBanners(),
-                SizedBox(
-                  height: AppHeightManager.h2point5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AppTextWidget(
-                      text: "Renting Cars",
-                      fontSize: FontSizeManager.fs17,
-                      color: AppColorManager.black,
+      body: RefreshIndicator(
+        onRefresh: ()async {
+         return getCars();
+        },
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(AppWidthManager.w3Point8),
+              child: Column(
+                children: [
+                  HomeAppBar(),
+                  SizedBox(
+                    height: AppHeightManager.h2point5,
+                  ),
+                  HomeBanners(),
+                  SizedBox(
+                    height: AppHeightManager.h2point5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AppTextWidget(
+                        text: "Renting Cars",
+                        fontSize: FontSizeManager.fs17,
+                        color: AppColorManager.black,
 
-                      fontWeight: FontWeight.w600,
-                    ),
-
-                  ],
-                ),
-                SizedBox(
-                  height: AppHeightManager.h1point8,
-                ),
-                Visibility(
-                    visible: status == 1 ,
-                    replacement: Padding(
-                      padding:  EdgeInsets.only(top: AppHeightManager.h10),
-                      child: CircularProgressIndicator(
-                        color: AppColorManager.mainColor,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ),
-                    child: CarsGridView(
-                      cars: cars,
-                    ))
-              ],
+
+                    ],
+                  ),
+                  SizedBox(
+                    height: AppHeightManager.h1point8,
+                  ),
+                  Visibility(
+                      visible: status == 1 ,
+                      replacement: Padding(
+                        padding:  EdgeInsets.only(top: AppHeightManager.h10),
+                        child: CircularProgressIndicator(
+                          color: AppColorManager.mainColor,
+                        ),
+                      ),
+                      child: CarsGridView(
+                        cars: cars,
+                      ))
+                ],
+              ),
             ),
           ),
         ),

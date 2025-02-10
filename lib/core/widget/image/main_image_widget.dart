@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:car_rental_app/core/resource/icon_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -34,15 +35,15 @@ class MainImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imageUrl.isNotEmpty
+    return (imageUrl??"").isNotEmpty
         ? CachedNetworkImage(
       imageUrl: imageUrl,
       width: width,
       height: height,
       fit: fit ?? BoxFit.cover,
       filterQuality: filterQuality,
-      errorWidget: (context, url, error) => Image.network(
-        "",
+      errorWidget: (context, url, error) => Image.asset(
+        AppImageManager.wheel,
         width: width,
         height: height,
         fit: fit ?? BoxFit.cover,

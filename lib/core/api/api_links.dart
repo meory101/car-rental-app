@@ -11,6 +11,7 @@ class ApiGetUrl {
 class ApiPostUrl {
   static  String login = '${_baseUrl}account/login/';
   static  String register = '${_baseUrl}account/register/';
+  static  String reserve = '${_baseUrl}car/reserve/';
 
 }
 

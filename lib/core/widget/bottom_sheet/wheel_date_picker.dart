@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../resource/color_manager.dart';
+import '../../resource/font_manager.dart';
+import '../../resource/size_manager.dart';
 import '../button/main_app_button.dart';
 import '../text/app_text_widget.dart';
 
@@ -9,14 +11,14 @@ import '../text/app_text_widget.dart';
 void showWheelDatePicker(
     {required BuildContext context,
       required Function(DateTime) onDateSelected}) {
-  DateTime selectedDate = DateTime(DateTime.now().year - 12);
+  DateTime selectedDate =DateTime.now();
   showModalBottomSheet(
     context: context,
     backgroundColor: AppColorManager.white,
     builder: (BuildContext builder) {
       return Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(AppRadiusManager.r10),
           color: AppColorManager.white,
         ),
         child: Column(
@@ -25,22 +27,22 @@ void showWheelDatePicker(
           children: [
             Container(
               alignment: Alignment.center,
-              height: 300,
+              height: AppHeightManager.h30,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppRadiusManager.r10),
                 color: AppColorManager.white,
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
+                padding: EdgeInsets.symmetric(horizontal: AppWidthManager.w5),
                 child: CupertinoDatePicker(
-
+                  minimumDate: DateTime.now(),
                   initialDateTime: DateTime.now(),
                   onDateTimeChanged: (DateTime? pickedDate) {
                     if (pickedDate != null) {
                       selectedDate = pickedDate;
                     }
                   },
-                  itemExtent: 100,
+                  itemExtent: AppHeightManager.h5,
 
                   mode: CupertinoDatePickerMode.date,
                   use24hFormat: true,
@@ -48,15 +50,15 @@ void showWheelDatePicker(
               ),
             ),
             SizedBox(
-              height: 20,
+              height: AppHeightManager.h2,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MainAppButton(
                   width: MediaQuery.of(context).size.width / 2.6,
-                  borderRadius: BorderRadius.circular(10),
-                  height: 100,
+                  borderRadius: BorderRadius.circular(AppRadiusManager.r10),
+                  height: AppHeightManager.h5,
                   onTap: () {
                     onDateSelected(selectedDate);
                     Navigator.of(context).pop();
@@ -66,17 +68,17 @@ void showWheelDatePicker(
                   alignment: Alignment.center,
                   child: AppTextWidget(
                     text: "save",
-                    fontSize: 16,
+                    fontSize: FontSizeManager.fs16,
                     color: AppColorManager.white,
                   ),
                 ),
                 SizedBox(
-                  width: 16,
+                  width: AppWidthManager.w2,
                 ),
                 MainAppButton(
                   width: MediaQuery.of(context).size.width / 2.6,
-                  borderRadius: BorderRadius.circular(10),
-                  height: 100,
+                  borderRadius: BorderRadius.circular(AppRadiusManager.r10),
+                  height: AppHeightManager.h5,
                   onTap: () {
                     Navigator.of(context).pop();
                   },
@@ -84,13 +86,13 @@ void showWheelDatePicker(
                   alignment: Alignment.center,
                   child: AppTextWidget(
                     text: "cancel",
-                    fontSize: 16,
+                    fontSize: FontSizeManager.fs16,
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: 16,
+              height: AppHeightManager.h2,
             ),
           ],
         ),

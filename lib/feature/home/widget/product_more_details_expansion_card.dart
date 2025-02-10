@@ -64,6 +64,26 @@ class _ProductMoreDetailsExpansionCardState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+
+                      AppTextWidget(
+                        text: "Car Status",
+                        fontSize: FontSizeManager.fs16,
+                        fontWeight: FontWeight.w600,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      AppTextWidget(
+                        text: EnumManager.statusCar[int.parse('${widget.car.status??0}')],
+                        fontSize: FontSizeManager.fs15,
+                        fontWeight: FontWeight.w700,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        color: EnumManager.statusCarColor[int.parse('${widget.car.status??0}')],
+
+                      ),
+                      SizedBox(
+                        height: AppHeightManager.h4point4,
+                      ),
                       AppTextWidget(
                         text: "Car Model",
                         fontSize: FontSizeManager.fs16,

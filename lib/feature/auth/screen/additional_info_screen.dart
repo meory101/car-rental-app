@@ -90,7 +90,6 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
       setState(() {
         status = 2;
       });
-      print(response.body);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: AppTextWidget(

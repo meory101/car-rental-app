@@ -9,13 +9,16 @@ import 'package:http/http.dart'as http;
 
 
   postMethod(String url,var body)async{
-
   http.Response response = await  http.post(
       Uri.parse(url),
       body: body,
 
+    headers: AppSharedPreferences.getToken().isNotEmpty ?{
+      "Accept": "application/json",
+      "Authorization": "Bearer ${AppSharedPreferences.getToken()}",
+    }:{},
+  );
 
-    );
   return response;
   }
 
@@ -23,7 +26,10 @@ import 'package:http/http.dart'as http;
 
     http.Response response = await  http.get(
       Uri.parse(url),
-
+      headers: AppSharedPreferences.getToken().isNotEmpty ?{
+        "Accept": "application/json",
+        "Authorization": "Bearer ${AppSharedPreferences.getToken()}",
+      }:{},
 
     );
     return response;

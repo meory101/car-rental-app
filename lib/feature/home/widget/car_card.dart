@@ -64,7 +64,7 @@ class _CarCardState extends State<CarCard> {
                   width: AppWidthManager.w44,
                   height: AppHeightManager.h27,
                   fit: BoxFit.cover,
-                  imagePath: AppImageManager.car3),
+                  imageUrl: widget.car.image1?? widget.car.image2 ?? widget.car.image3,),
             ),
             SizedBox(
               height: AppHeightManager.h06,
