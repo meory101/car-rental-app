@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:car_rental_app/core/helper/app_image_helper.dart';
@@ -93,7 +94,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: AppTextWidget(
-            text: response.body.toString(),
+            text: jsonDecode(response.body).toString(),
             color: AppColorManager.white,
             fontSize: FontSizeManager.fs14,
             fontWeight: FontWeight.w700,

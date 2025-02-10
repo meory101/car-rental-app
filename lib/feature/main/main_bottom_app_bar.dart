@@ -1,4 +1,5 @@
 import 'package:car_rental_app/feature/home/screen/home_screen.dart';
+import 'package:car_rental_app/feature/reservations/screen/reservations_screen.dart';
 import 'package:car_rental_app/feature/search/screen/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _MainAppBottomAppBarState extends State<MainBottomAppBar> {
     bottomBarScreens = [
       HomeScreen(),
       SearchScreen(),
-      MoreScreen(),
+      ReservationsScreen(),
       MoreScreen(),
     ];
 

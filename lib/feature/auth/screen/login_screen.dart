@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:car_rental_app/core/api/api_links.dart';
 import 'package:car_rental_app/core/storage/shared/shared_pref.dart';
 import 'package:car_rental_app/core/widget/container/shimmer_container.dart';
@@ -79,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: AppTextWidget(
-            text: response.body.toString(),
+            text: jsonDecode(response.body).toString(),
             color: AppColorManager.white,
             fontSize: FontSizeManager.fs14,
             fontWeight: FontWeight.w700,

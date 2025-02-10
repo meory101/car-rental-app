@@ -1,17 +1,13 @@
 import 'dart:convert';
 
-/// Converts JSON string to a List of CarsResponseEntity
 List<CarsResponseEntity> carsResponseEntityListFromJson(String str) =>
     List<CarsResponseEntity>.from(json.decode(str).map((x) => CarsResponseEntity.fromJson(x)));
 
-/// Converts a List of CarsResponseEntity to a JSON string
 String carsResponseEntityListToJson(List<CarsResponseEntity> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-/// Converts JSON string to a single CarsResponseEntity object
 CarsResponseEntity carsResponseEntityFromJson(String str) => CarsResponseEntity.fromJson(json.decode(str));
 
-/// Converts a single CarsResponseEntity object to JSON string
 String carsResponseEntityToJson(CarsResponseEntity data) => json.encode(data.toJson());
 
 class CarsResponseEntity {
@@ -51,7 +47,6 @@ class CarsResponseEntity {
   num? status;
   String? createdAt;
 
-  /// Convert JSON to Dart Object
   factory CarsResponseEntity.fromJson(Map<String, dynamic> json) => CarsResponseEntity(
     idCar: json['id_car'],
     brand: json['brand'],

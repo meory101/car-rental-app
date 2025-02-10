@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:car_rental_app/core/api/api_links.dart';
 import 'package:car_rental_app/core/widget/bottom_sheet/wheel_date_picker.dart';
 import 'package:car_rental_app/core/widget/container/shimmer_container.dart';
 import 'package:car_rental_app/core/widget/snack_bar/note_message.dart';
 import 'package:car_rental_app/feature/home/models/reserve_car_request_entity.dart';
+import 'package:car_rental_app/feature/main/main_bottom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/resource/size_manager.dart';
@@ -43,8 +46,17 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
       setState(() {
         status = 1;
       });
-      NoteMessage.showSuccessSnackBar(context: context, text: "success");
-      Navigator.of(context).pop();
+
+      selectedIndex = 2;
+
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) {
+            return MainBottomAppBar();
+          },
+        ),
+        (route) => false,
+      );
     } else {
       setState(() {
         status = 2;
@@ -53,7 +65,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: AppTextWidget(
-            text: response.body.toString(),
+            text: jsonDecode(response.body).toString(),
             color: AppColorManager.white,
             fontSize: FontSizeManager.fs14,
             fontWeight: FontWeight.w700,
@@ -87,7 +99,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                   showWheelDatePicker(
                     context: context,
                     onDateSelected: (date) {
-                      entity.startDate = date.toIso8601String().toString();
+                      entity.startDate = date.toLocal().toString();
                     },
                   );
                 });
@@ -246,7 +258,8 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                   ),
                                   MainAppButton(
                                     onTap: () {
-                                      entity.typeReservation = (selectedPlan + 1).toString();
+                                      entity.typeReservation =
+                                          (selectedPlan + 1).toString();
                                       Navigator.of(context).pop();
                                     },
                                     padding: EdgeInsets.symmetric(
@@ -301,9 +314,9 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
               Visibility(
                 visible: status == 0,
                 replacement: MainAppButton(
-                  onTap:  () {
-                    if(entity.startDate ==null || entity.typeReservation ==null){
-
+                  onTap: () {
+                    if (entity.startDate == null ||
+                        entity.typeReservation == null) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: AppTextWidget(

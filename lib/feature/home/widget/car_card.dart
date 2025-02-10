@@ -79,7 +79,7 @@ class _CarCardState extends State<CarCard> {
                     fontSize: FontSizeManager.fs15,
                     fontWeight: FontWeight.w400,
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                    maxLines: 1,
                   ),
                   SizedBox(
                     height: AppHeightManager.h3,

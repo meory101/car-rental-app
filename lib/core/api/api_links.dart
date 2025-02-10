@@ -5,6 +5,7 @@ String _baseUrl = 'http://192.168.146.164:8000/';
 class ApiGetUrl {
 
   static  String cars = '${_baseUrl}car/list/';
+  static  String myReservations = '${_baseUrl}car/my-temporary-reservations/';
 
 }
 

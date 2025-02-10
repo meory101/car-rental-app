@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:car_rental_app/core/api/api_links.dart';
 import 'package:car_rental_app/core/resource/color_manager.dart';
 import 'package:car_rental_app/core/resource/size_manager.dart';
@@ -51,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: AppTextWidget(
-            text: response.body.toString(),
+            text: jsonDecode(response.body).toString(),
             color: AppColorManager.white,
             fontSize: FontSizeManager.fs14,
             fontWeight: FontWeight.w700,
@@ -67,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: AppColorManager.background,
       body: RefreshIndicator(
+        color: AppColorManager.mainColor,
         onRefresh: ()async {
          return getCars();
         },

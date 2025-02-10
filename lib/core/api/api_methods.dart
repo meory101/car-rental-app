@@ -18,7 +18,10 @@ import 'package:http/http.dart'as http;
       "Authorization": "Bearer ${AppSharedPreferences.getToken()}",
     }:{},
   );
-
+  print(AppSharedPreferences.getToken());
+  print(body);
+  print(response.body);
+  print(response.statusCode);
   return response;
   }
 
@@ -32,6 +35,9 @@ import 'package:http/http.dart'as http;
       }:{},
 
     );
+    print(AppSharedPreferences.getToken());
+    print(response.body);
+    print(response.statusCode);
     return response;
   }
 
