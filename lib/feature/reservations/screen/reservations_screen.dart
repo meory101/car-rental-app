@@ -42,7 +42,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
 
   void getCars() async {
     http.Response response =
-    await HttpMethods().getMethod(ApiGetUrl.cars);
+    await HttpMethods().getMethod(ApiGetUrl.cars,null);
     if (response.statusCode == 200 || response.statusCode == 201) {
       cars = carsResponseEntityListFromJson(response.body);
     } else {}
@@ -73,7 +73,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
 
   void getReservations({bool updateUI = true}) async {
     http.Response response =
-    await HttpMethods().getMethod(ApiGetUrl.myReservations);
+    await HttpMethods().getMethod(ApiGetUrl.myReservations,null);
     if (response.statusCode == 200 ||
         response.statusCode == 201 ||
         response.statusCode == 404) {

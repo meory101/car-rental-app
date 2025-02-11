@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:car_rental_app/core/storage/shared/shared_pref.dart';
 import 'package:path/path.dart';
-
 import 'package:http/http.dart'as http;
  class HttpMethods{
 
@@ -40,9 +39,14 @@ import 'package:http/http.dart'as http;
     print(response.statusCode);
     return response;
   }
-  getMethod(String url,)async{
+  getMethod(String url,Map<String, dynamic>? params)async{
 
-    http.Response response = await  http.get(
+    if (params != null && params.isNotEmpty) {
+      Uri uri = Uri.parse(url).replace(queryParameters: params);
+      url = uri.toString();
+    }
+
+    http.Response response = await http.get(
       Uri.parse(url),
       headers: AppSharedPreferences.getToken().isNotEmpty ?{
         "Accept": "application/json",

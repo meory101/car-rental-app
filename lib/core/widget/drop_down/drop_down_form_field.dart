@@ -1,4 +1,5 @@
-  import 'package:flutter/material.dart';
+  import 'package:car_rental_app/core/resource/font_manager.dart';
+import 'package:flutter/material.dart';
   import 'package:flutter_svg/flutter_svg.dart';
   import '../../resource/color_manager.dart';
 import '../text/app_text_widget.dart';
@@ -65,9 +66,10 @@ import '../text/app_text_widget.dart';
             icon: const SizedBox(),
             decoration: InputDecoration(
               errorStyle: TextStyle(
-                fontSize:14
+                fontSize:FontSizeManager.fs14
               ),
               contentPadding: EdgeInsets.symmetric(horizontal: 16),
+
               suffixIcon: Padding(
                 padding: const EdgeInsets.all(19.0),
                 child: SizedBox(
@@ -104,7 +106,7 @@ import '../text/app_text_widget.dart';
               fontWeight: widget.hintFontWeight ?? FontWeight.w400,
               // fontFamily: FontFamilyManager.cairo,
               color: AppColorManager.textAppColor,
-              fontSize: 16,
+              fontSize: FontSizeManager.fs15,
             ),
             items: widget.options
                 .map((option) => DropdownMenuItem<NameAndId>(
@@ -114,14 +116,14 @@ import '../text/app_text_widget.dart';
                 child: AppTextWidget(
                   color: AppColorManager.black,
                   text: option.name,
-                  fontSize: 15,
+                  fontSize: FontSizeManager.fs14,
                 ),
               ),
             ))
                 .toList(),
             hint: AppTextWidget(
               text: widget.hint,
-              fontSize: widget.hintFontSize ?? 15,
+              fontSize: widget.hintFontSize ?? FontSizeManager.fs15,
               overflow: TextOverflow.visible,
               color: widget.hintFontColor ?? AppColorManager.grey,
             ),

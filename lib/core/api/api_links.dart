@@ -6,6 +6,7 @@ class ApiGetUrl {
 
   static  String cars = '${_baseUrl}car/list/';
   static  String myReservations = '${_baseUrl}car/my-temporary-reservations/';
+  static  String search = '${_baseUrl}car/serche-customer/';
 
 }
 

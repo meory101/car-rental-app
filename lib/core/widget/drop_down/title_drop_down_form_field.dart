@@ -1,3 +1,4 @@
+import 'package:car_rental_app/core/resource/font_manager.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../resource/color_manager.dart';
@@ -30,7 +31,7 @@ class TitleDropDownFormFieldWidget extends StatelessWidget {
       children: [
         AppTextWidget(
           text: title,
-          fontSize: 16,
+          fontSize: FontSizeManager.fs16,
           fontWeight: FontWeight.w600,
           color: AppColorManager.textAppColor,
         ),

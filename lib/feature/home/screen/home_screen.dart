@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:car_rental_app/core/api/api_links.dart';
 import 'package:car_rental_app/core/resource/color_manager.dart';
 import 'package:car_rental_app/core/resource/size_manager.dart';
+import 'package:car_rental_app/core/widget/drop_down/NameAndId.dart';
 import 'package:car_rental_app/feature/home/widget/cars_grid_view.dart';
 import 'package:car_rental_app/feature/home/widget/home_app_bar.dart';
 import 'package:car_rental_app/feature/home/widget/home_banners.dart';
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       status = 0;
     });
     http.Response response =
-    await HttpMethods().getMethod(ApiGetUrl.cars);
+    await HttpMethods().getMethod(ApiGetUrl.cars,null);
     if (response.statusCode == 200 || response.statusCode == 201) {
       setState(() {
         status = 1;
