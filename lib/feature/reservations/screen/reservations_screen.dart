@@ -35,7 +35,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   void initState() {
     super.initState();
     getCars();
-    _timer = Timer.periodic(Duration(seconds: 4), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       getReservations(updateUI: false);
     });
   }

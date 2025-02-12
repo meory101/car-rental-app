@@ -179,7 +179,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                         color:
                                             widget.car.isAvailableDaily == false
                                                 ? AppColorManager.grey
-                                                : AppColorManager.textAppColor,
+                                                : AppColorManager.black,
                                         fontWeight: FontWeight.w600,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
@@ -212,7 +212,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                         color: widget.car.isAvailableMonthly ==
                                                 false
                                             ? AppColorManager.grey
-                                            : AppColorManager.background,
+                                            : AppColorManager.black,
                                         fontWeight: FontWeight.w600,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
@@ -246,7 +246,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                         color: widget.car.isAvailableYearly ==
                                                 false
                                             ? AppColorManager.grey
-                                            : AppColorManager.background,
+                                            : AppColorManager.black,
                                         fontWeight: FontWeight.w600,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,

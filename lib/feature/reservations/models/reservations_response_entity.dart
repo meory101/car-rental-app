@@ -26,14 +26,14 @@ class ReservationsResponseEntity {
   num? car;
   String? startDate;
   String? endDate;
-  num? typeReservation;
-  num? statusReservation;
+  String? typeReservation;
+  String? statusReservation;
   String? timeReservation;
   String? remainingTime;
 
   factory ReservationsResponseEntity.fromJson(Map<String, dynamic> json) => ReservationsResponseEntity(
     idReservation: json['id_reservation'],
-    car: json['car'],
+    car: json['car']['id_car'],
     startDate: json['start_date'],
     endDate: json['end_date'],
     typeReservation: json['type_reservation'],
@@ -58,8 +58,8 @@ class ReservationsResponseEntity {
     num? car,
     String? startDate,
     String? endDate,
-    num? typeReservation,
-    num? statusReservation,
+    String? typeReservation,
+    String? statusReservation,
     String? timeReservation,
     String? remainingTime,
   }) =>

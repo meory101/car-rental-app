@@ -9,7 +9,6 @@ import '../../../../core/resource/size_manager.dart';
 import '../../../../core/widget/button/main_app_button.dart';
 import '../../../../core/widget/form_field/app_form_field.dart';
 import '../../../../core/widget/text/app_text_widget.dart';
-
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
@@ -23,7 +22,7 @@ class HomeAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             AppTextWidget(
-              text: "What Are You",
+              text: "ماالذي تبحث عنه اليوم؟",
               fontSize: FontSizeManager.fs18,
               fontWeight: FontWeight.w600,
               color: AppColorManager.black,
@@ -36,7 +35,7 @@ class HomeAppBar extends StatelessWidget {
           ],
         ),
         AppTextWidget(
-          text: "Looking For Today",
+          text: "",
           fontSize: FontSizeManager.fs18,
           fontWeight: FontWeight.w600,
           color: AppColorManager.black,
@@ -66,7 +65,7 @@ class HomeAppBar extends StatelessWidget {
                     AppIconManager.search,
                   ),
                 ),
-                hintText: "search",
+                hintText: "بحث",
               ),
             ),
           ],

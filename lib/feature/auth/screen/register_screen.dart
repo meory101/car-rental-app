@@ -51,8 +51,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: AppHeightManager.h5,
               color: AppColorManager.black,
               child: AppTextWidget(
-                text: "Next",
+                text: "التالي",
                 color: AppColorManager.white,
                 fontSize: FontSizeManager.fs15,
                 fontWeight: FontWeight.w600,
@@ -89,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: AppHeightManager.h5,
               color: AppColorManager.white,
               child: AppTextWidget(
-                text: "Sign In",
+                text: "تسجيل الدخول",
                 color: AppColorManager.black,
                 fontSize: FontSizeManager.fs15,
                 fontWeight: FontWeight.w600,
@@ -126,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: AppHeightManager.h4,
                     ),
                     AppTextWidget(
-                      text: "Create An Account.",
+                      text: "إنشاء حساب.",
                       color: AppColorManager.black,
                       fontSize: FontSizeManager.fs18,
                       fontWeight: FontWeight.w800,
@@ -144,15 +142,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: AppHeightManager.h5,
                     ),
                     TitleAppFormFiled(
-                      hint: "First Name",
-                      title: "First Name",
+                      hint: "الاسم الأول",
+                      title: "الاسم الأول",
                       onChanged: (value) {
                         registerRequestEntity.firstName = value??"";
                         return null;
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return "Empty Field";
+                          return "الحقل فارغ";
                         }
                         return null;
                       },
@@ -161,16 +159,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: AppHeightManager.h1point8,
                     ),
                     TitleAppFormFiled(
-                      hint: "Last Name",
-                      title: "Last Name",
+                      hint: "الاسم الأخير",
+                      title: "الاسم الأخير",
                       onChanged: (value) {
                         registerRequestEntity.lastName = value??"";
-
                         return null;
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return "Empty Field";
+                          return "الحقل فارغ";
                         }
                         return null;
                       },
@@ -179,16 +176,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: AppHeightManager.h1point8,
                     ),
                     TitleAppFormFiled(
-                      hint: "Username",
-                      title: "Username",
+                      hint: "اسم المستخدم",
+                      title: "اسم المستخدم",
                       onChanged: (value) {
                         registerRequestEntity.username = value??"";
-
                         return null;
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return "Empty Field";
+                          return "الحقل فارغ";
                         }
                         return null;
                       },
@@ -197,18 +193,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: AppHeightManager.h1point8,
                     ),
                     TitleAppFormFiled(
-                      hint: "Email Address",
-                      title: "Email Address",
+                      hint: "البريد الإلكتروني",
+                      title: "البريد الإلكتروني",
                       onChanged: (value) {
                         registerRequestEntity.email = value??"";
                         return null;
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return "Empty Field";
+                          return "الحقل فارغ";
                         }
                         if (!(value?.isEmail() ?? false)) {
-                          return "Invalid Email";
+                          return "بريد إلكتروني غير صالح";
                         }
                         return null;
                       },
@@ -217,15 +213,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: AppHeightManager.h1point8,
                     ),
                     TitleAppFormFiled(
-                      hint: "Phone Number",
-                      title: "Phone Number",
+                      hint: "رقم الهاتف",
+                      title: "رقم الهاتف",
                       onChanged: (value) {
                         registerRequestEntity.phone = value??"";
                         return null;
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return "Empty Field";
+                          return "الحقل فارغ";
                         }
                         return null;
                       },
@@ -234,18 +230,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: AppHeightManager.h1point8,
                     ),
                     TitleAppFormFiled(
-                      hint: "Password",
-                      title: "Password",
+                      hint: "كلمة المرور",
+                      title: "كلمة المرور",
                       onChanged: (value) {
                         registerRequestEntity.password = value??"";
                         return null;
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'required';
+                          return 'مطلوب';
                         }
                         if ((value?.length ?? 0) < 4) {
-                          return "At Least 4 ";
+                          return "على الأقل 4 أحرف";
                         }
                         return null;
                       },

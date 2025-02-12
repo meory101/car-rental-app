@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
     entity.username = username.text;
     entity.password = password.text;
     http.Response response =
-        await HttpMethods().postMethod(ApiPostUrl.login, entity.toJson());
+    await HttpMethods().postMethod(ApiPostUrl.login, entity.toJson());
     AuthResponseEntity authResponseEntity;
     if (response.statusCode == 200 || response.statusCode == 201) {
       setState(() {
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
             return MainBottomAppBar();
           },
         ),
-        (route) => false,
+            (route) => false,
       );
     } else {
       setState(() {
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: AppHeightManager.h4,
                     ),
                     AppTextWidget(
-                      text: "Sign In.",
+                      text: "تسجيل الدخول.",
                       color: AppColorManager.black,
                       fontSize: FontSizeManager.fs20,
                       fontWeight: FontWeight.w800,
@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: AppHeightManager.h05,
                     ),
                     AppTextWidget(
-                      text: "Sign In To Your Registered Account.",
+                      text: "قم بتسجيل الدخول إلى حسابك المسجل.",
                       color: AppColorManager.black,
                       fontSize: FontSizeManager.fs16,
                       fontWeight: FontWeight.w600,
@@ -151,15 +151,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: AppHeightManager.h5,
                     ),
                     TitleAppFormFiled(
-                      hint: "Username",
-                      title: "Username",
+                      hint: "اسم المستخدم",
+                      title: "اسم المستخدم",
                       onChanged: (value) {
                         username.text = value ?? "";
                         return null;
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'required';
+                          return 'مطلوب';
                         }
                         return null;
                       },
@@ -168,18 +168,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: AppHeightManager.h1point8,
                     ),
                     TitleAppFormFiled(
-                      hint: "Password",
-                      title: "Password",
+                      hint: "كلمة المرور",
+                      title: "كلمة المرور",
                       onChanged: (value) {
                         password.text = value ?? "";
                         return null;
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'required';
+                          return 'مطلوب';
                         }
                         if ((value?.length ?? 0) < 4) {
-                          return "At Least 4 ";
+                          return "على الأقل 4";
                         }
                         return null;
                       },
@@ -203,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: AppHeightManager.h5,
                             color: AppColorManager.black,
                             child: AppTextWidget(
-                              text: "Sign In",
+                              text: "تسجيل الدخول",
                               color: AppColorManager.white,
                               fontSize: FontSizeManager.fs15,
                               fontWeight: FontWeight.w600,
@@ -223,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: AppHeightManager.h5,
                           color: AppColorManager.white,
                           child: AppTextWidget(
-                            text: "Sign Up",
+                            text: "إنشاء حساب",
                             color: AppColorManager.black,
                             fontSize: FontSizeManager.fs15,
                             fontWeight: FontWeight.w600,
