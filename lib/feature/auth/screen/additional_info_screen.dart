@@ -52,7 +52,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: AppTextWidget(
-            text: "Please Enter The Required Attachments",
+            text: "الرجاء إدخال المرفقات المطلوبة",
             color: AppColorManager.white,
             fontSize: FontSizeManager.fs14,
             fontWeight: FontWeight.w700,
@@ -121,15 +121,14 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                   height: AppHeightManager.h4,
                 ),
                 AppTextWidget(
-                  text: "Additional Info.",
+                  text: "معلومات إضافية",
                   color: AppColorManager.black,
                   fontSize: FontSizeManager.fs18,
                   fontWeight: FontWeight.w800,
                   overflow: TextOverflow.visible,
                 ),
                 AppTextWidget(
-                  text:
-                      "PLease Fill The Following Fields To Continue To Your Account..!",
+                  text: "يرجى ملء الحقول التالية للمتابعة إلى حسابك..!",
                   color: AppColorManager.textGrey,
                   fontSize: FontSizeManager.fs15,
                   fontWeight: FontWeight.w500,
@@ -153,15 +152,15 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                 TitleAppFormFiled(
                   textInputType: TextInputType.number,
                   controller: idNumber,
-                  hint: "National Id Number",
-                  title: "National Id Number",
+                  hint: "رقم الهوية الوطنية",
+                  title: "رقم الهوية الوطنية",
                   onChanged: (value) {
 
                     return null;
                   },
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return "Empty Field";
+                      return "حقل فارغ";
                     }
                     return null;
                   },
@@ -170,7 +169,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                   height: AppHeightManager.h4,
                 ),
                 AppTextWidget(
-                  text: "National Id Image 1/2",
+                  text: "صورة الهوية الوطنية 1/2",
                   color: AppColorManager.textAppColor,
                   fontSize: FontSizeManager.fs16,
                   fontWeight: FontWeight.w600,
@@ -194,7 +193,8 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                   borderRadius: BorderRadius.circular(AppRadiusManager.r10),
                   color: AppColorManager.lightGreyOpacity6,
                   child: AppTextWidget(
-                    text: "National Id (Front)",
+                                  text: "صورة الهوية الوطنية (الوجه الامامي)",
+
                     color: frontNationalId == null
                         ? AppColorManager.black
                         : AppColorManager.textGrey,
@@ -213,7 +213,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                   height: AppHeightManager.h1point8,
                 ),
                 AppTextWidget(
-                  text: "National Id Image 2/2",
+                  text: "صورة الهوية الوطنية 2/2",
                   color: AppColorManager.textAppColor,
                   fontSize: FontSizeManager.fs16,
                   fontWeight: FontWeight.w600,
@@ -238,7 +238,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                   borderRadius: BorderRadius.circular(AppRadiusManager.r10),
                   color: AppColorManager.lightGreyOpacity6,
                   child: AppTextWidget(
-                    text: "National Id (Back)",
+                    text: "صورة الهوية الوطنية (الوجه الخلفي)",
                     color: backNationalId == null
                         ? AppColorManager.black
                         : AppColorManager.textGrey,
@@ -257,7 +257,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                   height: AppHeightManager.h1point8,
                 ),
                 AppTextWidget(
-                  text: "Driver License",
+                  text: "شهادة القيادة",
                   color: AppColorManager.textAppColor,
                   fontSize: FontSizeManager.fs16,
                   fontWeight: FontWeight.w600,
@@ -280,7 +280,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                   borderRadius: BorderRadius.circular(AppRadiusManager.r10),
                   color:  AppColorManager.lightGreyOpacity6,
                   child: AppTextWidget(
-                    text: "Driver License",
+                    text: "شهادة القيادة",
                     color: driveLicense == null
                         ? AppColorManager.black
                         : AppColorManager.textGrey,
@@ -300,7 +300,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                   borderRadius: BorderRadius.circular(AppRadiusManager.r10),
                   color: AppColorManager.black,
                   child: AppTextWidget(
-                    text: "Done",
+                    text: "المتابعة",
                     color: AppColorManager.white,
                     fontSize: FontSizeManager.fs15,
                     fontWeight: FontWeight.w600,

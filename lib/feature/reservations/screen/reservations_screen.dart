@@ -42,28 +42,29 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
 
   void getCars() async {
     http.Response response =
-    await HttpMethods().getMethod(ApiGetUrl.cars,null);
+        await HttpMethods().getMethod(ApiGetUrl.cars, null);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      cars = carsResponseEntityListFromJson(response.body);
+      cars = carsResponseEntityListFromJson(utf8.decode(response.bodyBytes));
     } else {}
     getReservations();
   }
+
   void deleteReservation(String id) async {
     http.Response response =
-    await HttpMethods().putMethod(ApiPostUrl.cancel,id);
+        await HttpMethods().putMethod(ApiPostUrl.cancel, id);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      selectedIndex =2;
+      selectedIndex = 2;
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) {
             return MainBottomAppBar();
           },
         ),
-            (route) => false,
-      );    } else {}
+        (route) => false,
+      );
+    } else {}
     getReservations();
   }
-
 
   @override
   void dispose() {
@@ -73,14 +74,15 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
 
   void getReservations({bool updateUI = true}) async {
     http.Response response =
-    await HttpMethods().getMethod(ApiGetUrl.myReservations,null);
+        await HttpMethods().getMethod(ApiGetUrl.myReservations, null);
     if (response.statusCode == 200 ||
         response.statusCode == 201 ||
         response.statusCode == 404) {
       List<ReservationsResponseEntity> newReservations =
-      response.statusCode == 404
-          ? []
-          : reservationsResponseEntityListFromJson(response.body);
+          response.statusCode == 404
+              ? []
+              : reservationsResponseEntityListFromJson(
+                  utf8.decode(response.bodyBytes));
 
       if (!listEquals(newReservations, reservations)) {
         if (mounted) {
@@ -117,7 +119,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   AppTextWidget(
-                    text: "Your Reservations",
+                    text: "حجوزاتي",
                     fontSize: FontSizeManager.fs18,
                     fontWeight: FontWeight.w600,
                     color: AppColorManager.black,
@@ -125,139 +127,136 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                   const SizedBox(height: 10),
                   reservations.isEmpty
                       ? Column(
-                    children: [
-                      SizedBox(
-                        height: AppHeightManager.h25,
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: MainImageWidget(
-                          fit: BoxFit.cover,
-                          height: AppHeightManager.h20,
-                          width: AppHeightManager.h20,
-                          imagePath: AppImageManager.wheel,
-                        ),
-                      ),
-                      AppTextWidget(
-                        text: "No Reservations yet ..!",
-                        fontSize: FontSizeManager.fs18,
-                        fontWeight: FontWeight.w600,
-                        color: AppColorManager.black,
-                      ),
-                    ],
-                  )
-                      : ListView.builder(
-                      itemCount: reservations.length,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final car = cars.firstWhere((car) =>
-                        car.idCar == reservations[index].car,
-                            orElse: () => CarsResponseEntity(
-                                image1: null));
-                        return DecoratedContainer(
-                          margin:
-                          EdgeInsets.only(bottom: AppHeightManager.h2),
-                          borderRadius:
-                          BorderRadius.circular(AppRadiusManager.r15),
-                          padding: EdgeInsets.all(AppWidthManager.w3Point8),
-                          child: Column(children: [
+                          children: [
                             SizedBox(
-                              height: AppHeightManager.h2,
+                              height: AppHeightManager.h25,
                             ),
-                           Row(
-                             mainAxisAlignment: MainAxisAlignment.start,
-                             children: [
-                               MainImageWidget(
-                                 height: AppHeightManager.h10,
-                                 width: AppHeightManager.h10,
-                                 imageUrl:car.image1 ??car.image2 ??car.image3 ??"",
-                               ),
-                               SizedBox(width: AppWidthManager.w1Point2,),
-                               Expanded(
-                                 child: AppTextWidget(
-                                   text:
-                                   car.description??""
-                                     ,
-                                   fontSize: FontSizeManager.fs16,
-                                   fontWeight: FontWeight.w600,
-                                   color: AppColorManager.black,
-                                   maxLines: 2,
-                                   
-                                 ),
-                               ),
-                             ],
-                           ),
-                            SizedBox(
-                              height: AppHeightManager.h2,
-                            ),
-                            Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                AppTextWidget(
-                                  text:
-                                  "start date ${reservations[index].startDate
-                                      ?.split("T")
-                                      .first}",
-                                  fontSize: FontSizeManager.fs15,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColorManager.black,
-                                ),
-                                AppTextWidget(
-                                  text:
-                                  "start date ${reservations[index].endDate
-                                      ?.split("T")
-                                      .first}",
-                                  fontSize: FontSizeManager.fs15,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColorManager.black,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: AppHeightManager.h2,
-                            ),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  AppTextWidget(
-                                    text: "remaining time  ",
-                                    fontSize: FontSizeManager.fs16,
-                                    fontWeight: FontWeight.w700,
-                                    color: AppColorManager.black,
-                                  ),
-                                  AppTextWidget(
-                                    text:
-                                    "${reservations[index].remainingTime}",
-                                    fontSize: FontSizeManager.fs15,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColorManager.mainColor,
-                                  )
-                                ]),
-
-                            SizedBox(
-                              height: AppHeightManager.h2,
-                            ),
-
-                            MainAppButton(
-                              onTap: () {
-                                deleteReservation(reservations[index].idReservation.toString());
-                              },
+                            Align(
                               alignment: Alignment.center,
-                              width: AppWidthManager.w90,
-                              height: AppHeightManager.h5,
-                              color: AppColorManager.red,
-                              child:    AppTextWidget(
-                                text: "Cancel",
-                                fontSize: FontSizeManager.fs16,
-                                fontWeight: FontWeight.w600,
-                                color: AppColorManager.white,
+                              child: MainImageWidget(
+                                fit: BoxFit.cover,
+                                height: AppHeightManager.h20,
+                                width: AppHeightManager.h20,
+                                imagePath: AppImageManager.wheel,
                               ),
-                            )
-                          ]),
-                        );
-                      })
+                            ),
+                            AppTextWidget(
+                              text: "لا يوجد حجوزات",
+                              fontSize: FontSizeManager.fs18,
+                              fontWeight: FontWeight.w600,
+                              color: AppColorManager.black,
+                            ),
+                          ],
+                        )
+                      : ListView.builder(
+                          itemCount: reservations.length,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final car = cars.firstWhere(
+                                (car) => car.idCar == reservations[index].car,
+                                orElse: () => CarsResponseEntity(image1: null));
+                            return DecoratedContainer(
+                              margin:
+                                  EdgeInsets.only(bottom: AppHeightManager.h2),
+                              borderRadius:
+                                  BorderRadius.circular(AppRadiusManager.r15),
+                              padding: EdgeInsets.all(AppWidthManager.w3Point8),
+                              child: Column(children: [
+                                SizedBox(
+                                  height: AppHeightManager.h2,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    MainImageWidget(
+                                      height: AppHeightManager.h10,
+                                      width: AppHeightManager.h10,
+                                      imageUrl: car.image1 ??
+                                          car.image2 ??
+                                          car.image3 ??
+                                          "",
+                                    ),
+                                    SizedBox(
+                                      width: AppWidthManager.w1Point2,
+                                    ),
+                                    Expanded(
+                                      child: AppTextWidget(
+                                        text: car.description ?? "",
+                                        fontSize: FontSizeManager.fs16,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColorManager.black,
+                                        maxLines: 2,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: AppHeightManager.h2,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AppTextWidget(
+                                      text:
+                                          "تاريج البدء ${reservations[index].startDate?.split("T").first}",
+                                      fontSize: FontSizeManager.fs15,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColorManager.black,
+                                    ),
+                                    AppTextWidget(
+                                      text:
+                                          "لتاريخ ${reservations[index].endDate?.split("T").first}",
+                                      fontSize: FontSizeManager.fs15,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColorManager.black,
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: AppHeightManager.h2,
+                                ),
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      AppTextWidget(
+                                        text: "الوقت المتبقي  ",
+                                        fontSize: FontSizeManager.fs16,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColorManager.black,
+                                      ),
+                                      AppTextWidget(
+                                        text:
+                                            "${reservations[index].remainingTime}",
+                                        fontSize: FontSizeManager.fs15,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColorManager.mainColor,
+                                      )
+                                    ]),
+                                SizedBox(
+                                  height: AppHeightManager.h2,
+                                ),
+                                MainAppButton(
+                                  onTap: () {
+                                    deleteReservation(reservations[index]
+                                        .idReservation
+                                        .toString());
+                                  },
+                                  alignment: Alignment.center,
+                                  width: AppWidthManager.w90,
+                                  height: AppHeightManager.h5,
+                                  color: AppColorManager.red,
+                                  child: AppTextWidget(
+                                    text: "الغاء الحجز",
+                                    fontSize: FontSizeManager.fs16,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColorManager.white,
+                                  ),
+                                )
+                              ]),
+                            );
+                          })
                 ],
               ),
             ),

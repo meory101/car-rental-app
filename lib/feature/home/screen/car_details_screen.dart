@@ -108,7 +108,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AppTextWidget(
-                    text: entity.startDate ?? "choose date",
+                    text: entity.startDate ?? "اختر تاريخ الحجز",
                     fontSize: FontSizeManager.fs15,
                     color: AppColorManager.textAppColor,
                     fontWeight: FontWeight.w600,
@@ -174,7 +174,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                       width: AppWidthManager.w90,
                                       height: AppHeightManager.h6,
                                       child: AppTextWidget(
-                                        text: "day (1 day)",
+                                        text: "يوم (1 day)",
                                         fontSize: FontSizeManager.fs15,
                                         color:
                                             widget.car.isAvailableDaily == false
@@ -207,7 +207,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                       width: AppWidthManager.w90,
                                       height: AppHeightManager.h6,
                                       child: AppTextWidget(
-                                        text: "month (30 Days)",
+                                        text: "شهر (30 Days)",
                                         fontSize: FontSizeManager.fs15,
                                         color: widget.car.isAvailableMonthly ==
                                                 false
@@ -241,7 +241,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                       width: AppWidthManager.w90,
                                       height: AppHeightManager.h6,
                                       child: AppTextWidget(
-                                        text: "year (365 Days)",
+                                        text: "سنة (365 Days)",
                                         fontSize: FontSizeManager.fs15,
                                         color: widget.car.isAvailableYearly ==
                                                 false
@@ -273,7 +273,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                     height: AppHeightManager.h7,
                                     width: AppWidthManager.w90,
                                     child: AppTextWidget(
-                                      text: "Done",
+                                      text: "المتابعة",
                                       fontSize: FontSizeManager.fs15,
                                       color: AppColorManager.white,
                                       fontWeight: FontWeight.w700,
@@ -296,7 +296,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppTextWidget(
-                        text: "Rent",
+                        text: "الاجار",
                         fontSize: FontSizeManager.fs15,
                         color: AppColorManager.textAppColor,
                         fontWeight: FontWeight.w600,
@@ -320,7 +320,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: AppTextWidget(
-                            text: "select date and reservation type",
+                            text: "اختر نوع الاجار والتاريخ",
                             color: AppColorManager.white,
                             fontSize: FontSizeManager.fs14,
                             fontWeight: FontWeight.w700,
@@ -341,7 +341,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                   height: AppHeightManager.h7,
                   width: AppWidthManager.w60,
                   child: AppTextWidget(
-                    text: "Book Now",
+                    text: "حجز",
                     fontSize: FontSizeManager.fs15,
                     color: AppColorManager.white,
                     fontWeight: FontWeight.w700,
@@ -357,6 +357,10 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
               ),
             ],
           ),
+          SizedBox(
+            height: AppHeightManager.h2,
+          ),
+
         ],
       ),
       body: SafeArea(
@@ -401,11 +405,11 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                           PriceTextWidget(
                             currency: "",
                             price: selectedPlan == 0 || selectedPlan == -1
-                                ? "day ${widget.car.dailyRentPrice}"
+                                ? "يوم ${widget.car.dailyRentPrice}"
                                 : selectedPlan == 1
-                                    ? "month ${widget.car.monthlyRentPrice}"
+                                    ? "شهر ${widget.car.monthlyRentPrice}"
                                     : selectedPlan == 2
-                                        ? "year ${widget.car.yearlyRentPrice}"
+                                        ? "سنة ${widget.car.yearlyRentPrice}"
                                         : "",
                             priceStyle: TextStyle(
                               fontSize: FontSizeManager.fs16,

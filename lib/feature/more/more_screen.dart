@@ -57,7 +57,7 @@ class _MoreScreenState extends State<MoreScreen> {
         height: AppHeightManager.h6,
         color: AppColorManager.black,
         child: AppTextWidget(
-          text: "Logout",
+          text: "تسجبل الخروج",
           color: AppColorManager.black,
           fontSize: FontSizeManager.fs15,
           fontWeight: FontWeight.w600,
@@ -126,7 +126,7 @@ class _MoreScreenState extends State<MoreScreen> {
                   height: AppHeightManager.h1point8,
                 ),
                 AppTextWidget(
-                  text: "Your Phone Number : ${entity?.phone ?? ""}",
+                  text: "رقم الهاتف الخاص بك : ${entity?.phone ?? ""}",
                   fontSize: FontSizeManager.fs16,
                   color: AppColorManager.black,
                   fontWeight: FontWeight.w600,
@@ -141,7 +141,7 @@ class _MoreScreenState extends State<MoreScreen> {
                   height: AppHeightManager.h1point8,
                 ),
                 AppTextWidget(
-                  text: "Your Id Number : ${entity?.idNumber ?? ""}",
+                  text: "الرقم الوطني الخاص بك : ${entity?.idNumber ?? ""}",
                   fontSize: FontSizeManager.fs16,
                   color: AppColorManager.black,
                   fontWeight: FontWeight.w600,

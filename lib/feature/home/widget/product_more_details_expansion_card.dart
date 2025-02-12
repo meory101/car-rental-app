@@ -66,7 +66,7 @@ class _ProductMoreDetailsExpansionCardState
                     children: [
 
                       AppTextWidget(
-                        text: "Car Status",
+                        text: "حالة السيارة",
                         fontSize: FontSizeManager.fs16,
                         fontWeight: FontWeight.w600,
                         overflow: TextOverflow.ellipsis,
@@ -85,7 +85,7 @@ class _ProductMoreDetailsExpansionCardState
                         height: AppHeightManager.h4point4,
                       ),
                       AppTextWidget(
-                        text: "Car Model",
+                        text: "المودل",
                         fontSize: FontSizeManager.fs16,
                         fontWeight: FontWeight.w600,
                         overflow: TextOverflow.ellipsis,
@@ -102,7 +102,7 @@ class _ProductMoreDetailsExpansionCardState
                         height: AppHeightManager.h4point4,
                       ),
                       AppTextWidget(
-                        text: "Car Brand",
+                        text: "البراند",
                         fontSize: FontSizeManager.fs16,
                         fontWeight: FontWeight.w600,
                         overflow: TextOverflow.ellipsis,
@@ -120,7 +120,7 @@ class _ProductMoreDetailsExpansionCardState
                         height: AppHeightManager.h4point4,
                       ),
                       AppTextWidget(
-                        text: "Description",
+                        text: "الوصف",
                         fontSize: FontSizeManager.fs16,
                         fontWeight: FontWeight.w600,
                         overflow: TextOverflow.ellipsis,
@@ -150,7 +150,7 @@ class _ProductMoreDetailsExpansionCardState
                     MainAxisAlignment.spaceBetween,
                     children: [
                       AppTextWidget(
-                        text: "Car Details",
+                        text: "تفاصيل السيارة",
                         fontSize: FontSizeManager.fs16,
                         fontWeight: FontWeight.w600,
                       ),

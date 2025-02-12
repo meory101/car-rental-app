@@ -42,11 +42,14 @@ class _SearchScreenState extends State<SearchScreen> {
     });
     http.Response response = await HttpMethods().getMethod(ApiGetUrl.search,
         {"category": selectedCategory?.id, "type_rent": selectedRent?.id});
-    if (response.statusCode == 200 || response.statusCode == 201|| response.statusCode==404) {
+    if (response.statusCode == 200 || response.statusCode == 201 ||
+        response.statusCode == 404) {
       setState(() {
         status = 1;
       });
-      cars =response.statusCode==404?[]: carsResponseEntityListFromJson(response.body);
+      cars = response.statusCode == 404 ? [] : carsResponseEntityListFromJson(
+          utf8.decode(response.bodyBytes)
+      );
     }
 
     else {
@@ -91,8 +94,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           searchCars();
                           setState(() {});
                         },
-                        hint: "category",
-                        title: "category",
+                        hint: "الفئة",
+                        title: "الفئة",
                         options: [
                           NameAndId(name: "فاخرة", id: "1"),
                           NameAndId(name: "اقتصادية", id: "2"),
@@ -106,8 +109,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           searchCars();
                           setState(() {});
                         },
-                        hint: "rent",
-                        title: "rent",
+                        hint: "الاجار",
+                        title: "الاجار",
                         options: [
                           NameAndId(name: "يومي", id: "1"),
                           NameAndId(name: "شهري", id: "2"),
@@ -148,7 +151,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                       AppTextWidget(
-                        text: "start..!",
+                        text: "البدء..!",
                         fontSize: FontSizeManager.fs18,
                         fontWeight: FontWeight.w600,
                         color: AppColorManager.black,

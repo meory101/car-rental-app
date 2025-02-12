@@ -39,7 +39,7 @@ class _CarsGridViewState extends State<CarsGridView> {
                   ),
                 ),
                 AppTextWidget(
-                  text: "no cars..!",
+                  text: "لا يوجد سيارات",
                   fontSize: FontSizeManager.fs18,
                   fontWeight: FontWeight.w600,
                   color: AppColorManager.black,

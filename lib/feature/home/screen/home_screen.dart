@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         status = 1;
       });
-      cars = carsResponseEntityListFromJson(response.body);
+      cars = carsResponseEntityListFromJson(utf8.decode(response.bodyBytes));
 
     } else {
       setState(() {
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppTextWidget(
-                        text: "Renting Cars",
+                        text: "سيارات الاجار",
                         fontSize: FontSizeManager.fs17,
                         color: AppColorManager.black,
 

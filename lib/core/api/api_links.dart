@@ -14,7 +14,7 @@ class ApiPostUrl {
   static  String login = '${_baseUrl}account/login/';
   static  String register = '${_baseUrl}account/register/';
   static  String reserve = '${_baseUrl}car/reserve/';
-  static  String cancel = '${_baseUrl}reserve/cancel';
+  static  String cancel = '${_baseUrl}car/reserve/cancel';
 
 }
 

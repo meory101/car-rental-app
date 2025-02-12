@@ -67,7 +67,7 @@ void showWheelDatePicker(
                   color: AppColorManager.mainColor,
                   alignment: Alignment.center,
                   child: AppTextWidget(
-                    text: "save",
+                    text: "حفظ",
                     fontSize: FontSizeManager.fs16,
                     color: AppColorManager.white,
                   ),
@@ -85,7 +85,7 @@ void showWheelDatePicker(
                   color: AppColorManager.white,
                   alignment: Alignment.center,
                   child: AppTextWidget(
-                    text: "cancel",
+                    text: "الغاء",
                     fontSize: FontSizeManager.fs16,
                   ),
                 ),
