@@ -15,7 +15,7 @@ import '../../../core/resource/size_manager.dart';
 import '../../../core/widget/container/decorated_container.dart';
 import '../../../core/widget/image/main_image_widget.dart';
 import '../../../core/widget/text/app_text_widget.dart';
-import '../../home/models/cars_response_entity.dart';
+import '../../home/models/car_list_response_entity.dart';
 import '../models/reservations_response_entity.dart';
 
 class ReservationsScreen extends StatefulWidget {
@@ -44,7 +44,9 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     http.Response response =
         await HttpMethods().getMethod(ApiGetUrl.cars, null);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      cars = carsResponseEntityListFromJson(utf8.decode(response.bodyBytes));
+      cars =
+          carListResponseEntityFromJson(utf8.decode(response.bodyBytes)).cars ??
+              [];
     } else {}
     getReservations();
   }
@@ -119,7 +121,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   AppTextWidget(
-                    text: "حجوزاتي",
+                    text: " حجوزاتي وسياراتي",
                     fontSize: FontSizeManager.fs18,
                     fontWeight: FontWeight.w600,
                     color: AppColorManager.black,
@@ -189,6 +191,25 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                                         maxLines: 2,
                                       ),
                                     ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: AppHeightManager.h2,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    MainAppButton(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: AppWidthManager.w8,
+                                          vertical: AppWidthManager.w1),
+                                      height: AppHeightManager.h6,
+                                      color: AppColorManager.mainColor,
+                                      child: AppTextWidget(
+                                          text:
+                                              "${reservations[index].typeReservation}"),
+                                    )
                                   ],
                                 ),
                                 SizedBox(

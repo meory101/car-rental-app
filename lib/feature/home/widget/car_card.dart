@@ -10,7 +10,7 @@ import '../../../core/resource/font_manager.dart';
 import '../../../core/resource/size_manager.dart';
 import '../../../core/widget/text/app_text_widget.dart';
 import '../../../core/widget/text/price_text_widget.dart';
-import '../models/cars_response_entity.dart';
+import '../models/car_list_response_entity.dart';
 
 class CarCard extends StatefulWidget {
   final CarsResponseEntity car;

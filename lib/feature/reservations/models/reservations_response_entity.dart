@@ -39,7 +39,7 @@ class ReservationsResponseEntity {
     typeReservation: json['type_reservation'],
     statusReservation: json['status_reservation'],
     timeReservation: json['time_reservation'],
-    remainingTime: json['remaining_time'],
+    // remainingTime: json['remaining_time'],
   );
 
   Map<String, dynamic> toJson() => {

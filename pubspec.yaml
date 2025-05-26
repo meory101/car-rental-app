@@ -28,6 +28,7 @@ dependencies:
   dots_indicator: ^3.0.0
   hive: ^2.2.3
   intl:
+  url_launcher: ^6.3.0
   easy_localization:
 
 

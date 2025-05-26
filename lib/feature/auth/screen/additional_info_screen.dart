@@ -66,6 +66,8 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
     http.Response response =
     await HttpMethods().postMethod(ApiPostUrl.register, entity.toJson());
     AuthResponseEntity authResponseEntity;
+    print(utf8.decode(response.bodyBytes));
+    print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201 ) {
       setState(() {
         status = 1;
@@ -74,6 +76,17 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
       if((response.body??"").isNotEmpty){
         authResponseEntity = authResponseEntityFromJson(response.body);
         AppSharedPreferences.cashToken(token: authResponseEntity.access ?? "");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: AppTextWidget(
+              text:  utf8.decode(response.bodyBytes),
+              color: AppColorManager.white,
+              fontSize: FontSizeManager.fs14,
+              fontWeight: FontWeight.w700,
+              overflow: TextOverflow.visible,
+            ),
+          ),
+        );
         HiveHelper.saveUser(
             boxKey: AppKeyManager.userBox,
             saveKey: AppKeyManager.userInfo,
@@ -82,7 +95,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) {
-            return MainBottomAppBar();
+            return LoginScreen();
           },
         ),
             (route) => false,
@@ -182,7 +195,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                   onTap: () async {
                     if (frontNationalId != null) return;
                     frontNationalId = await AppImageHelper.pickImageFrom(
-                        source: ImageSource.gallery);
+                        source: ImageSource.camera);
                     setState(() {});
                   },
                   outLinedBorde: frontNationalId == null ? true : false,
@@ -227,7 +240,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                     if (backNationalId != null) return;
 
                     backNationalId = await AppImageHelper.pickImageFrom(
-                        source: ImageSource.gallery);
+                        source: ImageSource.camera);
                     setState(() {});
                   },
                   outLinedBorde: backNationalId == null ? true : false,
@@ -269,7 +282,7 @@ class _AdditionalInfoScreenState extends State<AdditionalInfoScreen> {
                 MainAppButton(
                   onTap: () async {
                     driveLicense = await AppImageHelper.pickImageFrom(
-                        source: ImageSource.gallery);
+                        source: ImageSource.camera);
                     setState(() {});
                   },
                   outLinedBorde: driveLicense == null ? true : false,

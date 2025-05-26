@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:car_rental_app/core/api/api_links.dart';
 import 'package:car_rental_app/core/widget/bottom_sheet/wheel_date_picker.dart';
 import 'package:car_rental_app/core/widget/container/shimmer_container.dart';
+import 'package:car_rental_app/core/widget/image/main_image_widget.dart';
 import 'package:car_rental_app/core/widget/snack_bar/note_message.dart';
 import 'package:car_rental_app/feature/home/models/reserve_car_request_entity.dart';
 import 'package:car_rental_app/feature/main/main_bottom_app_bar.dart';
@@ -10,12 +11,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/resource/size_manager.dart';
 import '../../../core/api/api_methods.dart';
+import '../../../core/helper/lanucher_helper.dart';
 import '../../../core/resource/color_manager.dart';
 import '../../../core/resource/font_manager.dart';
 import '../../../core/widget/button/main_app_button.dart';
 import '../../../core/widget/text/app_text_widget.dart';
 import '../../../core/widget/text/price_text_widget.dart';
-import '../models/cars_response_entity.dart';
+import '../models/car_list_response_entity.dart';
 import '../widget/car_main_info.dart';
 import '../widget/product_details_image_slider.dart';
 import '../widget/product_more_details_expansion_card.dart';
@@ -34,6 +36,11 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
   int selectedPlan = -1;
   int status = -1;
   ReserveCarRequestEntity entity = ReserveCarRequestEntity();
+  var offices = [];
+  var customers = [];
+  var office;
+
+  var customer;
 
   void reserveCar() async {
     setState(() {
@@ -65,7 +72,87 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: AppTextWidget(
-            text:  utf8.decode(response.bodyBytes),
+            text: utf8.decode(response.bodyBytes),
+            color: AppColorManager.white,
+            fontSize: FontSizeManager.fs14,
+            fontWeight: FontWeight.w700,
+            overflow: TextOverflow.visible,
+          ),
+        ),
+      );
+    }
+  }
+
+  void getOffices() async {
+    http.Response response =
+        await HttpMethods().getMethod(ApiGetUrl.listOffices, {});
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      // Properly decode body for Arabic characters
+      final decodedBody = utf8.decode(response.bodyBytes);
+      offices = jsonDecode(decodedBody);
+
+      if (offices is List) {
+        offices.forEach((element) {
+          print(element['name'].toString()); // Arabic name
+          print(widget.car.ownerOffice.toString()); // Your car's office name
+          print(
+              element['name'].toString() == widget.car.ownerOffice.toString());
+          print('ddddddddddddddddd');
+          if (element['name'].toString() == widget.car.ownerOffice.toString()) {
+            setState(() {
+              office = element;
+            });
+            print(office.toString() +
+                " dddddddddddddddddddddddddddddddddddddd000");
+          }
+        });
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: AppTextWidget(
+            text: utf8.decode(response.bodyBytes),
+            // Decode error messages too
+            color: AppColorManager.white,
+            fontSize: FontSizeManager.fs14,
+            fontWeight: FontWeight.w700,
+            overflow: TextOverflow.visible,
+          ),
+        ),
+      );
+    }
+  }
+
+  void getCustomers() async {
+    http.Response response =
+        await HttpMethods().getMethod(ApiGetUrl.customers, {});
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      customers = jsonDecode(response.body);
+
+      if (customers is List) {
+        customers.forEach(
+          (element) {
+            print('pppppppppppppppp');
+            print((element['first_name']+"-"+element['last_name']));
+            print(widget.car.ownerCustomer);
+            print('pppppppppppppppp');
+            if ((element['first_name']+"-"+element['last_name']).toString() == widget.car.ownerCustomer.toString()) {
+              customer = element;
+              print(customer);
+              print('00000000000000000000000000000000000000');
+              setState(() {
+
+              });
+            }
+          },
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: AppTextWidget(
+            text: utf8.decode(response.bodyBytes),
             color: AppColorManager.white,
             fontSize: FontSizeManager.fs14,
             fontWeight: FontWeight.w700,
@@ -77,7 +164,16 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
   }
 
   @override
+  void initState() {
+    getCustomers();
+    getOffices();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(widget.car.idCar);
+    print('car iddddddddddddddddddddd');
     return Scaffold(
       backgroundColor: AppColorManager.white,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -108,7 +204,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AppTextWidget(
-                    text: entity.startDate ?? "اختر تاريخ الحجز",
+                    text: entity.startDate ?? "اختر تاريخ",
                     fontSize: FontSizeManager.fs15,
                     color: AppColorManager.textAppColor,
                     fontWeight: FontWeight.w600,
@@ -155,8 +251,11 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      if (widget.car.isAvailableDaily == false)
+                                      if (widget.car.isAvailableDaily ==
+                                          false) {
                                         return;
+                                      }
+
                                       setState(() {
                                         selectedPlan = 0;
                                       });
@@ -189,7 +288,9 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                   InkWell(
                                     onTap: () {
                                       if (widget.car.isAvailableMonthly ==
-                                          false) return;
+                                          false) {
+                                        return;
+                                      }
                                       setState(() {
                                         selectedPlan = 1;
                                       });
@@ -221,8 +322,12 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      if (widget.car.isAvailableYearly == false)
+                                      print(widget.car.isAvailableYearly);
+                                      print('yeaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+                                      if (widget.car.isAvailableYearly ==
+                                          false) {
                                         return;
+                                      }
 
                                       setState(() {
                                         selectedPlan = 2;
@@ -360,7 +465,43 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
           SizedBox(
             height: AppHeightManager.h2,
           ),
-
+          Visibility(
+            visible: status == 0,
+            child: ShimmerContainer(
+              height: AppHeightManager.h7,
+              width: AppWidthManager.w60,
+            ),
+            replacement: MainAppButton(
+              onTap: () {
+                entity.typeReservation = 4.toString();
+                entity.startDate = entity.startDate.toString() == "null"
+                    ? DateTime.now().toString()
+                    : entity.startDate;
+                reserveCar();
+              },
+              padding:
+                  EdgeInsets.symmetric(horizontal: AppWidthManager.w3Point8),
+              alignment: Alignment.center,
+              color: AppColorManager.black,
+              outLinedBorde: true,
+              borderRadius: BorderRadius.circular(AppRadiusManager.r15),
+              borderColor: AppColorManager.mainColor,
+              height: AppHeightManager.h7,
+              width: AppWidthManager.w90,
+              child: AppTextWidget(
+                text: "شراء",
+                fontSize: FontSizeManager.fs15,
+                color: AppColorManager.mainColor,
+                fontWeight: FontWeight.w700,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: AppHeightManager.h2,
+          ),
         ],
       ),
       body: SafeArea(
@@ -427,11 +568,220 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                   SizedBox(
                     height: AppHeightManager.h2,
                   ),
+                  office == null
+                      ? Center()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppTextWidget(
+                              text: "معلومات المكتب",
+                              fontSize: FontSizeManager.fs16,
+                              fontWeight: FontWeight.w800,
+                              color: AppColorManager.mainColor,
+                            ),
+                            SizedBox(
+                              height: AppHeightManager.h2,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                        height: AppHeightManager.h8,
+                                        width: AppHeightManager.h8,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle),
+                                        child: MainImageWidget(
+                                          imageUrl: office['image'],
+                                        )),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: AppHeightManager.h2,
+                                        ),
+                                        AppTextWidget(
+                                          text: "اسم المكتب" +
+                                              " :  " +
+                                              office['name'],
+                                          fontSize: FontSizeManager.fs15,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                        SizedBox(
+                                          height: AppHeightManager.h08,
+                                        ),
+                                        AppTextWidget(
+                                          text: "موقع المكتب" +
+                                              " :  " +
+                                              office['location'],
+                                          fontSize: FontSizeManager.fs15,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColorManager.textAppColor,
+                                        ),
+                                        SizedBox(
+                                          height: AppHeightManager.h2,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        UrlLauncherHelper.makeCall(
+                                            phoneNumber:
+                                                office['phone_number_1']);
+                                      },
+                                      child: CircleAvatar(
+                                        backgroundColor: AppColorManager.red,
+                                        child: Icon(
+                                          Icons.call,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: AppWidthManager.w1Point8,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        UrlLauncherHelper.makeCall(
+                                            phoneNumber:
+                                                office['phone_number_2']);
+                                      },
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.blue,
+                                        child: Icon(
+                                          Icons.mail,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: AppHeightManager.h2,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Row(
+                                  children: List.generate(
+                                    office['ratings'].toInt(),
+                                    (index) {
+                                      return Icon(
+                                        Icons.star,
+                                        color: AppColorManager.orange,
+                                        size: 15,
+                                      );
+                                    },
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                  SizedBox(
+                    height: AppHeightManager.h2,
+                  ),
+                  customer == null
+                      ? Center()
+                      : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppTextWidget(
+                        text: "معلومات صاحب السيارة",
+                        fontSize: FontSizeManager.fs16,
+                        fontWeight: FontWeight.w800,
+                        color: AppColorManager.mainColor,
+                      ),
+                      SizedBox(
+                        height: AppHeightManager.h2,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: AppHeightManager.h2,
+                                  ),
+                                  AppTextWidget(
+                                    text: "اسم الناشر" +
+                                        " :  " +
+                                        customer['first_name']+" "+ customer['last_name'],
+                                    fontSize: FontSizeManager.fs15,
+                                    fontWeight: FontWeight.w700,
+                                    maxLines: 2,
+                                  ),
+                                  SizedBox(
+                                    height: AppHeightManager.h2,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  UrlLauncherHelper.makeCall(
+                                      phoneNumber:
+                                      customer['phone']);
+                                },
+                                child: CircleAvatar(
+                                  backgroundColor: AppColorManager.red,
+                                  child: Icon(
+                                    Icons.call,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: AppWidthManager.w1Point8,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  UrlLauncherHelper.makeCall(
+                                      phoneNumber:
+                                      customer['phone']);
+                                },
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blue,
+                                  child: Icon(
+                                    Icons.mail,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: AppHeightManager.h2,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: AppHeightManager.h2,
+                  ),
                   ProductMoreDetailsExpansionCard(
                     car: widget.car,
                   ),
                   SizedBox(
-                    height: AppHeightManager.h19,
+                    height: AppHeightManager.h30,
                   ),
                 ],
               ),

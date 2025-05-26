@@ -15,7 +15,7 @@ import '../../../core/resource/icon_manager.dart';
 import '../../../core/widget/form_field/app_form_field.dart';
 import '../../../core/widget/image/main_image_widget.dart';
 import '../../../core/widget/text/app_text_widget.dart';
-import '../../home/models/cars_response_entity.dart';
+import '../../home/models/car_list_response_entity.dart';
 import 'package:http/http.dart' as http;
 
 import '../../home/widget/cars_grid_view.dart';
@@ -47,9 +47,8 @@ class _SearchScreenState extends State<SearchScreen> {
       setState(() {
         status = 1;
       });
-      cars = response.statusCode == 404 ? [] : carsResponseEntityListFromJson(
-          utf8.decode(response.bodyBytes)
-      );
+      cars = carListResponseEntityFromJson(utf8.decode(response.bodyBytes)).cars??[];
+
     }
 
     else {

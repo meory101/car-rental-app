@@ -17,7 +17,7 @@ import '../../../core/resource/icon_manager.dart';
 import '../../../core/widget/text/app_text_widget.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/cars_response_entity.dart';
+import '../models/car_list_response_entity.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         status = 1;
       });
-      cars = carsResponseEntityListFromJson(utf8.decode(response.bodyBytes));
+      cars = carListResponseEntityFromJson(utf8.decode(response.bodyBytes)).cars??[];
 
     } else {
       setState(() {
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppTextWidget(
-                        text: "سيارات الاجار",
+                        text: " سيارات الاجار والبيع",
                         fontSize: FontSizeManager.fs17,
                         color: AppColorManager.black,
 

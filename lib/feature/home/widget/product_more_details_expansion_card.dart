@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/resource/font_manager.dart';
 import '../../../../core/resource/icon_manager.dart';
 import '../../../../core/widget/text/app_text_widget.dart';
-import '../models/cars_response_entity.dart';
+import '../models/car_list_response_entity.dart';
 import 'expansion_list.dart';
 
 
@@ -73,12 +73,13 @@ class _ProductMoreDetailsExpansionCardState
                         maxLines: 1,
                       ),
                       AppTextWidget(
-                        text: EnumManager.statusCar[int.parse('${widget.car.status??0}')],
+                        text:(widget.car.status??"").toString(),
                         fontSize: FontSizeManager.fs15,
                         fontWeight: FontWeight.w700,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
-                        color: EnumManager.statusCarColor[int.parse('${widget.car.status??0}')],
+                        color: AppColorManager.orange,
+                        // color: EnumManager.statusCarColor[int.parse('${widget.car.status??0}')],
 
                       ),
                       SizedBox(

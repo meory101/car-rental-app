@@ -6,7 +6,7 @@ import '../../../core/resource/color_manager.dart';
 import '../../../core/resource/font_manager.dart';
 import '../../../core/resource/icon_manager.dart';
 import '../../../core/widget/image/main_image_widget.dart';
-import '../models/cars_response_entity.dart';
+import '../models/car_list_response_entity.dart';
 import 'car_card.dart';
 
 class CarsGridView extends StatefulWidget {

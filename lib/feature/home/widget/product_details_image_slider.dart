@@ -1,5 +1,4 @@
 import 'package:car_rental_app/core/widget/image/main_image_widget.dart';
-import 'package:car_rental_app/feature/home/models/cars_response_entity.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/resource/color_manager.dart';
 import '../../../../core/resource/size_manager.dart';
 import '../../../core/resource/icon_manager.dart';
+import '../models/car_list_response_entity.dart';
 
 class ProductDetailsImageSlider extends StatefulWidget {
   final CarsResponseEntity car;
