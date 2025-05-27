@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:car_rental_app/feature/reservations/models/remaining_time.dart';
+
 List<ReservationsResponseEntity> reservationsResponseEntityListFromJson(String str) =>
     List<ReservationsResponseEntity>.from(json.decode(str).map((x) => ReservationsResponseEntity.fromJson(x)));
 
@@ -29,7 +31,7 @@ class ReservationsResponseEntity {
   String? typeReservation;
   String? statusReservation;
   String? timeReservation;
-  String? remainingTime;
+  RemainingTime? remainingTime;
 
   factory ReservationsResponseEntity.fromJson(Map<String, dynamic> json) => ReservationsResponseEntity(
     idReservation: json['id_reservation'],
@@ -39,7 +41,7 @@ class ReservationsResponseEntity {
     typeReservation: json['type_reservation'],
     statusReservation: json['status_reservation'],
     timeReservation: json['time_reservation'],
-    // remainingTime: json['remaining_time'],
+    remainingTime: json['remaining_time']==null?null:RemainingTime.fromJson(json['remaining_time']),
   );
 
   Map<String, dynamic> toJson() => {
@@ -61,7 +63,7 @@ class ReservationsResponseEntity {
     String? typeReservation,
     String? statusReservation,
     String? timeReservation,
-    String? remainingTime,
+    RemainingTime? remainingTime,
   }) =>
       ReservationsResponseEntity(
         idReservation: idReservation ?? this.idReservation,
