@@ -72,12 +72,18 @@ import 'package:http/http.dart'as http;
 
   postWithMultiFile(String url, Map data, List<File> files,List<String>names) async {
     var multipartrequest = await http.MultipartRequest('POST', Uri.parse(url));
+   print(data);
+   print('dddddddddd555555555ddddddddddddddddddddddd');
     for (int i = 0; i < files.length; i++) {
       var length = await files[i].length();
       var stream = await http.ByteStream(files[i].openRead());
       var multipartfile = await http.MultipartFile(names[i], stream, length,
           filename: basename(files[i].path));
       multipartrequest.files.add(multipartfile);
+    }
+    if(AppSharedPreferences.getToken().isNotEmpty){
+      multipartrequest.headers['Authorization'] = 'Bearer ${AppSharedPreferences.getToken()}';
+
     }
     print(url)
     ;

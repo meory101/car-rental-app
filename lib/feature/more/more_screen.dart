@@ -2,6 +2,7 @@ import 'package:car_rental_app/core/storage/shared/shared_pref.dart';
 import 'package:car_rental_app/core/widget/button/main_app_button.dart';
 import 'package:car_rental_app/feature/auth/models/auth_response_entity.dart';
 import 'package:car_rental_app/feature/auth/screen/login_screen.dart';
+import 'package:car_rental_app/feature/more/add_car_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -145,6 +146,93 @@ class _MoreScreenState extends State<MoreScreen> {
                   fontSize: FontSizeManager.fs16,
                   color: AppColorManager.black,
                   fontWeight: FontWeight.w600,
+                ),
+
+
+
+                SizedBox(
+                  height: AppHeightManager.h3,
+                ),
+
+
+
+
+            Divider(color:
+              AppColorManager.borderGrey,),
+
+
+                SizedBox(
+                  height: AppHeightManager.h3,
+                ),
+
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: MainAppButton(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return AddCarScreen();
+                              },
+                            ),
+                          );
+                        },
+                        borderColor: AppColorManager.black,
+                        alignment: Alignment.center,
+                        width: AppWidthManager.w90,
+                        height: AppHeightManager.h6,
+                        color: AppColorManager.black,
+                        child: AppTextWidget(
+                          text: "رفع سيارة ",
+                          color: AppColorManager.white,
+                          fontSize: FontSizeManager.fs15,
+                          fontWeight: FontWeight.w600,
+                          overflow: TextOverflow.visible,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: AppWidthManager.w2,),
+                    Expanded(
+                      child: MainAppButton(
+                        onTap: () {
+                          AppSharedPreferences.clear();
+                          selectedIndex = 0;
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return LoginScreen();
+                              },
+                            ),
+                                (route) => false,
+                          );
+                        },
+                        borderColor: AppColorManager.black,
+                        alignment: Alignment.center,
+                        width: AppWidthManager.w90,
+                        height: AppHeightManager.h6,
+                        color: AppColorManager.black,
+                        child: AppTextWidget(
+                          text: "استعراض",
+                          color: AppColorManager.white,
+                          fontSize: FontSizeManager.fs15,
+                          fontWeight: FontWeight.w600,
+                          overflow: TextOverflow.visible,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(
+                  height: AppHeightManager.h3,
+                ),
+                Divider(color:
+                AppColorManager.borderGrey,),
+
+                SizedBox(
+                  height: AppHeightManager.h3,
                 ),
               ],
             ),

@@ -14,6 +14,7 @@ class ApiGetUrl {
 
 class ApiPostUrl {
   static  String login = '${_baseUrl}account/login/';
+  static  String addCar = '${_baseUrl}car/customer  /list-create/';
   static  String register = '${_baseUrl}account/register/';
   static  String reserve = '${_baseUrl}car/reserve/';
   static  String cancel = '${_baseUrl}car/reserve/cancel';
